@@ -9,10 +9,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
 
-@Controller
+@RestController
 public class CurrencyController {
 
     private final TransactionService transactionService;
@@ -25,6 +26,11 @@ public class CurrencyController {
         this.transactionService = transactionService;
         this.currencyService = currencyService;
         this.currencyPriceService = currencyPriceService;
+    }
+
+    @GetMapping("/hello")
+    public String welcome() {
+        return "HelloWorld !!";
     }
 
     @GetMapping("currency/{id}/details")
