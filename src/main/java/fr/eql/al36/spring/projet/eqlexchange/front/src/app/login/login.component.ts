@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {AuthenticateService} from "../service/authenticate.service";
+import {User} from "../model/User";
+import {Router} from "@angular/router";
+import {Login} from "../model/login";
+import {LoginResponse} from "../model/LogResponse";
 
 @Component({
   selector: 'app-login',
@@ -8,9 +12,25 @@ import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 })
 export class LoginComponent implements OnInit {
 
-  constructor() {}
+  login: Login = new Login("","");
+  err:number = 0;
+  message :string | undefined ;
+
+  constructor(private authService: AuthenticateService, private router:Router) {}
 
   ngOnInit(): void {
+
   }
 
+  doLogin() {
+    console.log(this.login.email);
+    this.authService.authenticate(this.login).subscribe({
+      next: (loginResp : LoginResponse)=>{
+        console.log(loginResp);
+        this.message = loginResp.message;
+      },
+      error: (err) => { console.log("error:"+err); this.message = "erreur appel WS login";}
+    });
+  }
 }
+
