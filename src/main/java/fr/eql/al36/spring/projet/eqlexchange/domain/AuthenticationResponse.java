@@ -5,21 +5,21 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 
-public class UserTransfer {
+public class AuthenticationResponse {
 
     private String email;
     private List<String> roles;
     private String token;
     private HttpStatus status;
 
-    public UserTransfer(String username, List<String> roles, String token, HttpStatus status) {
+    public AuthenticationResponse(String username, List<String> roles, String token, HttpStatus status) {
         this.roles = roles;
         this.token = token;
         this.email = username;
         this.status = status;
     }
 
-    public UserTransfer() {
+    public AuthenticationResponse() {
         this.token = "";
         this.email = "";
         this.roles = Collections.emptyList();

@@ -22,23 +22,22 @@ public class MyConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-
+        http.cors().disable();
         http.csrf().disable().authorizeRequests()
-                .antMatchers("/login/authenticate").permitAll()
+                .antMatchers("/authenticate").permitAll()
                 .antMatchers("/").permitAll()
                 .antMatchers("/access-denied").permitAll()
                 .antMatchers("/css/**").permitAll()
                 .antMatchers("/img/**").permitAll()
-                .antMatchers("/login/hello").permitAll()
                 .antMatchers("/js/**").permitAll()
                 .antMatchers("/user/**",
                              "/currency/**",
                              "/transaction/**",
-                             "/login/hello",
+                             "/hello",
                              "/wallet/**").hasRole("USER")
                 .anyRequest().authenticated()
                 .and()
-                .formLogin().loginPage("/login").defaultSuccessUrl("/login/hello").failureUrl("/login?error=true").permitAll()
+                .formLogin().loginPage("/login").defaultSuccessUrl("/hello").failureUrl("/login?error=true").permitAll()
                 .and()
                 .logout().deleteCookies("JSESSIONID").logoutUrl("/logout").logoutSuccessUrl("/login");
 

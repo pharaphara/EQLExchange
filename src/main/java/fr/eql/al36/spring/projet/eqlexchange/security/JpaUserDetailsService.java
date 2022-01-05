@@ -3,6 +3,7 @@ package fr.eql.al36.spring.projet.eqlexchange.security;
 import fr.eql.al36.spring.projet.eqlexchange.domain.Authority;
 import fr.eql.al36.spring.projet.eqlexchange.domain.User;
 import fr.eql.al36.spring.projet.eqlexchange.repository.UserRepository;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -32,7 +33,8 @@ public class JpaUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = userRepository.findByEmail(email).orElseThrow(
                 () -> new UsernameNotFoundException("Email: " + email + " not found"));
-        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), new ArrayList<>());
+        Collection<SimpleGrantedAuthority> authorities = convertToSpringAuthorities(user.getAuthorities());
+        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), authorities);
     }
 
 

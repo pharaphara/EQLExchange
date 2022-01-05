@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.eql.al36.spring.projet.eqlexchange.domain.AuthenticationRequest;
-import fr.eql.al36.spring.projet.eqlexchange.domain.UserTransfer;
+import fr.eql.al36.spring.projet.eqlexchange.domain.AuthenticationResponse;
 import fr.eql.al36.spring.projet.eqlexchange.security.JpaUserDetailsService;
 import fr.eql.al36.spring.projet.eqlexchange.security.JwtUtil;
 import fr.eql.al36.spring.projet.eqlexchange.security.SecurityConstant;
@@ -26,7 +26,6 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 @RestController
-@RequestMapping("/login")
 public class LoginController {
 
     @Autowired
@@ -42,11 +41,11 @@ public class LoginController {
     @RequestMapping(value = "/authenticate", method = { RequestMethod.POST })
     @ApiOperation(value = "authenticate")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Success", response = UserTransfer.class),
+            @ApiResponse(code = 200, message = "Success", response = AuthenticationResponse.class),
             @ApiResponse(code = 403, message = SecurityConstant.FORBIDDEN),
             @ApiResponse(code = 422, message = SecurityConstant.USER_NOT_FOUND),
             @ApiResponse(code = 417, message = SecurityConstant.EXCEPTION_FAILED) })
-    public ResponseEntity<UserTransfer> authenticate(@RequestBody AuthenticationRequest authenticationRequest) {
+    public ResponseEntity<AuthenticationResponse> authenticate(@RequestBody AuthenticationRequest authenticationRequest) {
         try {
             String username = authenticationRequest.getEmail();
             String password = authenticationRequest.getPassword();
@@ -57,16 +56,15 @@ public class LoginController {
             UserDetails userDetails = this.customUserDetailsService.loadUserByUsername(username);
 
             List<String> roles = new ArrayList();
-
             for (GrantedAuthority authority : userDetails.getAuthorities()) {
                 roles.add(authority.toString());
             }
 
-            return new ResponseEntity<>(new UserTransfer(userDetails.getUsername(), roles,
+            return new ResponseEntity<>(new AuthenticationResponse(userDetails.getUsername(), roles,
                     JwtUtil.createToken(userDetails), HttpStatus.OK), HttpStatus.OK);
 
         } catch (BadCredentialsException bce) {
-            return new ResponseEntity<>(new UserTransfer(), HttpStatus.UNPROCESSABLE_ENTITY);
+            return new ResponseEntity<>(new AuthenticationResponse(), HttpStatus.UNPROCESSABLE_ENTITY);
 
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
