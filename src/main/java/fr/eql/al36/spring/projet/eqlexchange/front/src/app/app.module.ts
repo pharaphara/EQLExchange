@@ -3,28 +3,33 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
-import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
-import {AuthenticateService} from "./service/authenticate.service";
 import { HttpClientModule } from '@angular/common/http';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import {HomeModule} from "./home/home.module";
+import {RouterModule, Routes} from "@angular/router";
+import {DashboardComponent} from "./dashboard/component/dashboard/dashboard.component";
+import {HomeComponent} from "./home/component/home/home.component";
+import {DashboardModule} from "./dashboard/dashboard.module";
 
+const routes: Routes = [
+  { path: 'dashboard', component: DashboardComponent },
+  { path: '', component: HomeComponent }
+];
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
-    LoginComponent,
-    DashboardComponent
   ],
   imports: [
     BrowserModule,
     NgbModule,
-    AppRoutingModule,
+    RouterModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule.forRoot(routes),
+    HomeModule,
+    DashboardModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {AuthenticateService} from "../service/authenticate.service";
-import {User} from "../model/User";
 import {Router} from "@angular/router";
-import {Login} from "../model/login";
-import {LoginResponse} from "../model/LogResponse";
+import {Login} from "../../model/login";
+import {LoginResponse} from "../../model/LogResponse";
+import {AuthenticateService} from "../../service/authenticate.service";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,7 @@ export class LoginComponent implements OnInit {
   err:number = 0;
   message :string | undefined ;
 
-  constructor(private authService: AuthenticateService, private router:Router) {}
+  constructor(private authService: AuthenticateService, private router:Router, private modalService: NgbModal) {}
 
   ngOnInit(): void {
 
@@ -28,6 +29,7 @@ export class LoginComponent implements OnInit {
       next: (loginResp : LoginResponse)=>{
         console.log(loginResp);
         this.message = loginResp.message;
+        this.modalService.dismissAll();
       },
       error: (err) => { console.log("error:"+err); this.message = "erreur appel WS login";}
     });
