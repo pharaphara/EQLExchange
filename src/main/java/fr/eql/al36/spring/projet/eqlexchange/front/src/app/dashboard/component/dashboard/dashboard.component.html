@@ -1,9 +1,47 @@
-<main role="main" class="container">
-  <div class="jumbotron">
-    <h1>Hello world</h1>
-    <p class="lead">
-      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aliquam temporibus laborum facere dolor ipsum. Sint est laudantium recusandae labore explicabo, doloribus dolor, corporis, ab laboriosam nam iste quo beatae. Doloremque.
-    </p>
-
+<div class="preloader">
+  <div class="preloader-inner">
+    <div class="preloader-icon">
+      <span></span>
+      <span></span>
+    </div>
   </div>
-</main>
+</div>
+<div>
+  <div class="wrapper d-flex align-items-stretch">
+    <nav id="sidebar">
+      <h1><a routerLink="dashboard" class="logo">E-Xchange</a></h1>
+      <hr>
+      <ul class="list-unstyled components mb-5">
+        <li class="active">
+          <a href="#"><span class="fa fa-home mr-3"></span><span class="nav-icon-attribute">Home</span></a>
+        </li>
+        <li>
+          <a href="#" ><i class="fa fa-archive" aria-hidden="true"></i><span class="nav-icon-attribute">Wallet</span></a>
+        </li>
+        <li>
+          <a href="#"><i class="fa fa-exchange"></i><span class="nav-icon-attribute">Transactions</span></a>
+        </li>
+        <li>
+          <a href="#" ><span class="fa fa-arrow-down"></span><span class="nav-icon-attribute">Refill</span></a>
+        </li>
+        <li>
+          <a href="#" ><i class="fa fa-solid fa-gear"></i><span class="nav-icon-attribute">Settings</span></a>
+        </li>
+        <hr>
+        <li>
+          <a href="#" ><i class="fa fa-regular fa-user"></i><span class="nav-icon-attribute"></span></a>
+        </li>
+        <li>
+          <div class="logout">
+            <a (click)="logout()" data-backdrop="false"><i style="color: red" class="fa fa-light fa-power-off"></i><span class="nav-icon-attribute">Logout</span></a>
+          </div>
+        </li>
+      </ul>
+
+    </nav>
+
+    <div id="content">
+      <div> hello world</div>
+    </div>
+  </div>
+</div>
