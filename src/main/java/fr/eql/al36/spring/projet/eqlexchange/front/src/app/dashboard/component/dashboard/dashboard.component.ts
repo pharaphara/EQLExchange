@@ -14,6 +14,7 @@ export class DashboardComponent implements OnInit {
   }
 
   logout() {
+    console.log('hello world' + sessionStorage.getItem('authToken'))
     this.authenticateService.logout();
   }
 

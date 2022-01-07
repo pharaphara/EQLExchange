@@ -11,9 +11,10 @@ import {RouterModule, Routes} from "@angular/router";
 import {DashboardComponent} from "./dashboard/component/dashboard/dashboard.component";
 import {HomeComponent} from "./home/component/home/home.component";
 import {DashboardModule} from "./dashboard/dashboard.module";
+import {AuthGuard} from "./guards/auth.guard";
 
 const routes: Routes = [
-  { path: 'dashboard', component: DashboardComponent },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: '', component: HomeComponent }
 ];
 

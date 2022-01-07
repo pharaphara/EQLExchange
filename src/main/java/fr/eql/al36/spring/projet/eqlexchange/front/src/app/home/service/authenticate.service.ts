@@ -30,6 +30,15 @@ export class AuthenticateService {
       );
   }
 
+  public isAuthenticate() {
+    if(sessionStorage.getItem('authToken') != null) {
+      return true;
+    } else {
+      return false;
+    }
+
+  }
+
   public logout() {
     sessionStorage.clear();
     this.isAuthenticated = false;
