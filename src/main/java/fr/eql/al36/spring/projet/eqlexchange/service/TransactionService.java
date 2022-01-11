@@ -71,32 +71,11 @@ public class TransactionService {
 
     public void executeFromTradeOrders(TradeOrder tradeOrder1, TradeOrder tradeOrder2) {
 
-        System.out.println("entered execute");
-        System.out.println("----------");
-        System.out.println("execute: tradeOrder1 id:" + tradeOrder1.getId());
-        System.out.println("execute: tradeOrder1 user:" + tradeOrder1.getUser().getUsername());
-        System.out.println("execute: tradeOrder1 currency to buy:" + tradeOrder1.getCurrencyToBuy().getTicker());
-        System.out.println("execute: tradeOrder1 amount to buy:" + tradeOrder1.getAmountToBuy());
-        System.out.println("execute: tradeOrder1 currency to sell:" + tradeOrder1.getCurrencyToSell().getTicker());
-        System.out.println("execute: tradeOrder1 amount to sell:" + tradeOrder1.getAmountToSell());
-        System.out.println("-----------------------------------------------------");
-        System.out.println("execute: tradeOrder2 id:" + tradeOrder2.getId());
-        System.out.println("execute: tradeOrder2 user:" + tradeOrder2.getUser().getUsername());
-        System.out.println("execute: tradeOrder2 currency to buy:" + tradeOrder2.getCurrencyToBuy().getTicker());
-        System.out.println("execute: tradeOrder2 amount to buy:" + tradeOrder2.getAmountToBuy());
-        System.out.println("execute: tradeOrder2 currency to sell:" + tradeOrder2.getCurrencyToSell().getTicker());
-        System.out.println("execute: tradeOrder2 amount to sell:" + tradeOrder2.getAmountToSell());
-        System.out.println("-----------------------------------------------------");
+
         if(tradeOrder1.getCurrencyToBuy().getId() != tradeOrder2.getCurrencyToSell().getId()
            || tradeOrder1.getCurrencyToSell().getId() != tradeOrder2.getCurrencyToBuy().getId()) {
-            System.out.println("couille dans le paté");
-            System.out.println("tradeOrder1.getCurrencyToBuy().getId() : " + tradeOrder1.getCurrencyToBuy().getId());
-            System.out.println("tradeOrder2.getCurrencyToSell().getId() : " + tradeOrder2.getCurrencyToSell().getId());
-            System.out.println("tradeOrder1.getCurrencyToSell().getId() : " + tradeOrder1.getCurrencyToSell().getId());
-            System.out.println("tradeOrder2.getCurrencyToBuy().getId() : " + tradeOrder2.getCurrencyToBuy().getId());
             return;
         }
-        System.out.println("execute: orders currencies match");
 
         boolean isEven = false;
         if(tradeOrder1.getAmountToBuy() / tradeOrder2.getAmountToSell() >= MAX_SLIPPAGE_RATE
@@ -114,15 +93,10 @@ public class TransactionService {
         double amount;
         if(isEven) {
             amount = tradeOrder2.getAmountToSell();
-            System.out.println("execute: trade orders are even, amount to sell: " + amount + " " +
-                               tradeOrder2.getCurrencyToSell().getTicker());
         } else {
             amount = (Math.min(tradeOrder1.getAmountToBuy(), tradeOrder2.getAmountToSell()));
-            System.out.println("execute: trade orders are NOT even, amount to sell: " + amount + " " +
-                               tradeOrder2.getCurrencyToSell().getTicker());
 
         }
-        System.out.println("execute: proceeding to first transfer");
 
         User tradeOrder1User = tradeOrder1.getUser();
         User tradeOrder2User = tradeOrder2.getUser();
@@ -146,7 +120,6 @@ public class TransactionService {
         // AMOUNT : tradeOrder2.getAmountToBuy / tradeOrder1.getAmountToSell
         // CURRENCY : tradeOrder2.getCurrencyToBuy / tradeOrder1.getCurrencyToSell
 
-        System.out.println("execute: proceeding to second transfer");
         if(isEven) {
             amount = tradeOrder1.getAmountToSell();
         } else {
@@ -184,7 +157,6 @@ public class TransactionService {
             tradeOrderRepository.save(smallerTradeOrder);
             tradeOrderRepository.save(biggerTradeOrder);
 
-            System.out.println("execute: creating new trade order");
             tradeOrderService.place(TradeOrder.builder()
                                             .user(biggerTradeOrder.getUser())
                                             .currencyToBuy(biggerTradeOrder.getCurrencyToBuy())

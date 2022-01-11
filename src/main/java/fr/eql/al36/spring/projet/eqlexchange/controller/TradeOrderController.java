@@ -48,7 +48,6 @@ public class TradeOrderController {
         User connectedUser = (User) session.getAttribute("sessionUser");
         Currency currencyToBuy = currencyRepository.findById(Integer.parseInt(id1)).get();
         model.addAttribute("currencyPricesJSON", currencyPriceService.getCurrencyPricesJSON(currencyToBuy));
-        System.out.println("currency to buy: " + currencyToBuy.getTicker());
         model.addAttribute("currencyToSell",currencyService.findCurrencyById(3));
         model.addAttribute("currenciesToSell",currencyService.getAllExceptOneWithId(currencyToBuy.getId()));
 
@@ -74,9 +73,6 @@ public class TradeOrderController {
         List<TradeOrder> matchingTradeOrders = tradeOrderService.match(tradeOrder);
 
         if (matchingTradeOrders.size() > 0) {
-            for (TradeOrder matchingTradeOrder : matchingTradeOrders) {
-                System.out.println("maaatch: " + matchingTradeOrder.getId());
-            }
 
             TradeOrder selectedTradeOrder = tradeOrderService.selectBestAmong(tradeOrder, matchingTradeOrders);
             transactionService.executeFromTradeOrders(tradeOrder, selectedTradeOrder);

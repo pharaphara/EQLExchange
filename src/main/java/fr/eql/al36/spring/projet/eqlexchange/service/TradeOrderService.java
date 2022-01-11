@@ -74,33 +74,19 @@ public class TradeOrderService {
     }
 
     public List<TradeOrder> match(TradeOrder referenceTradeOrder) {
-        System.out.println("match(): referenceTradeOrder.getCurrencyToBuy : " + referenceTradeOrder.getCurrencyToBuy().getTicker());
-        System.out.println("match(): referenceTradeOrder.getAmountToBuy : " + referenceTradeOrder.getAmountToBuy());
-        System.out.println("match(): referenceTradeOrder.getCurrencyToSell : " + referenceTradeOrder.getCurrencyToSell().getTicker());
-        System.out.println("match(): referenceTradeOrder.getAmountToSell : " + referenceTradeOrder.getAmountToSell());
         //return tradeOrderRepository.findAllMatchingTradeOrders(referenceTradeOrder.getUser(), referenceTradeOrder.getCurrencyToBuy(), referenceTradeOrder.getCurrencyToSell());
         List<TradeOrder> allTradeOrders = (List) tradeOrderRepository.findAll();
         List<TradeOrder> matchingTradeOrders = new ArrayList<>();
         for (TradeOrder tradeOrder : allTradeOrders) {
-            System.out.println("match(): treating trade order " + tradeOrder.getId());
-            System.out.println("match(): trade order " + tradeOrder.getId() + " user: " + tradeOrder.getUser().getId() + " " + tradeOrder.getUser().getUsername());
-            System.out.println("match(): trade order " + tradeOrder.getId() + " currency to buy: " + tradeOrder.getCurrencyToBuy().getTicker());
-            System.out.println("match(): trade order " + tradeOrder.getId() + " amount to buy: " + tradeOrder.getAmountToBuy());
-            System.out.println("match(): trade order " + tradeOrder.getId() + " currency to sell: " + tradeOrder.getCurrencyToSell().getTicker());
-            System.out.println("match(): trade order " + tradeOrder.getId() + " amount to sell: " + tradeOrder.getAmountToSell());
-            System.out.println("match(): trade order " + tradeOrder.getId() + " completion date: " + tradeOrder.getCompletionDate());
-            System.out.println("match(): trade order " + tradeOrder.getId() + " cancellation date: " + tradeOrder.getCancellationDate());
             if (tradeOrder.getCompletionDate() == null
                     && tradeOrder.getCancellationDate() == null
                     && !Objects.equals(tradeOrder.getUser().getId(), referenceTradeOrder.getUser().getId())
                     && Objects.equals(tradeOrder.getCurrencyToBuy().getId(), referenceTradeOrder.getCurrencyToSell().getId())
                     && Objects.equals(tradeOrder.getCurrencyToSell().getId(), referenceTradeOrder.getCurrencyToBuy().getId())) {
-                System.out.println("match(): ************************************** trade order " + tradeOrder.getId() + " is a match !!!!!!!!!!!");
+
                 matchingTradeOrders.add(tradeOrder);
-                System.out.println("match: trade order with id " + tradeOrder.getId());
             }
         }
-        System.out.println("match(): total matches: " + matchingTradeOrders.size());
         return matchingTradeOrders;
     }
 
@@ -141,10 +127,7 @@ public class TradeOrderService {
     }
 
     public TradeOrder place(TradeOrder tradeOrder) {
-        System.out.println("place: tradeOrder.getUser()" + tradeOrder.getUser().getUsername());
-        System.out.println("place: tradeOrder.getCurrencyToBuy()" + tradeOrder.getCurrencyToSell().getTicker());
-        System.out.println("place: assetRepository.getAssetByUserAndCurrency(tradeOrder.getUser(),tradeOrder.getCurrencyToBuy()).getBalance()" + assetRepository.getAssetByUserAndCurrency(tradeOrder.getUser(),tradeOrder.getCurrencyToSell()).getBalance());
-        System.out.println("place: tradeOrder.getAmountToBuy()" + tradeOrder.getAmountToSell());
+
         if (assetRepository.getAssetByUserAndCurrency(tradeOrder.getUser(),tradeOrder.getCurrencyToSell()).getBalance() >= tradeOrder.getAmountToSell()) {
             tradeOrder = tradeOrderRepository.save(tradeOrder);
             return tradeOrder;
@@ -158,7 +141,6 @@ public class TradeOrderService {
         }
         double currencyToSellLatestPrice = currencyPriceService.getLatestPriceOFCurrency(currencyService.findCurrencyById(currencyToSellId)).getPrice();
         double currencyToBuyLatestPrice = currencyPriceService.getLatestPriceOFCurrency(currencyService.findCurrencyById(currencyToBuyId)).getPrice();
-        System.out.println("amounttttttt" + amountToSell * currencyToSellLatestPrice / currencyToBuyLatestPrice);
         return amountToSell * currencyToSellLatestPrice / currencyToBuyLatestPrice;
     }
 }

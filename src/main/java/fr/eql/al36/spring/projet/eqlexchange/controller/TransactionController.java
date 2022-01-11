@@ -1,17 +1,20 @@
 package fr.eql.al36.spring.projet.eqlexchange.controller;
 
 import fr.eql.al36.spring.projet.eqlexchange.domain.*;
+import fr.eql.al36.spring.projet.eqlexchange.security.JpaUserDetailsService;
 import fr.eql.al36.spring.projet.eqlexchange.service.*;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
-@Controller
+@RestController
 public class TransactionController {
 
     private final TransactionService transactionService;
@@ -24,27 +27,34 @@ public class TransactionController {
 
     private final UserService userService;
 
+    private final JpaUserDetailsService userDetailsService;
+
     private final CurrencyPriceService currencyPriceService;
 
 
     public TransactionController(TransactionService transactionService, CurrencyService currencyService,
                                  PaymentService paymentService, AssetService assetService,
-                                 UserService userService, CurrencyPriceService currencyPriceService) {
+                                 UserService userService, JpaUserDetailsService userDetailsService, CurrencyPriceService currencyPriceService) {
         this.transactionService = transactionService;
         this.currencyService = currencyService;
         this.paymentService = paymentService;
         this.assetService = assetService;
         this.userService = userService;
+        this.userDetailsService = userDetailsService;
         this.currencyPriceService = currencyPriceService;
     }
 
+    private User getConnectedUser() {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username = userDetails.getUsername();
+        User connectedUser = userService.findUserByEmail(username);
+        return connectedUser;
+    }
 
     @GetMapping("wallet/history")
-    public String displayWallet(Model model, HttpSession session) {
-        User connectedUser = (User) session.getAttribute("sessionUser");
-        model.addAttribute("sessionUser", connectedUser);
-        model.addAttribute("transactions", transactionService.getTransactionsDoneByUser(connectedUser));
-        return "wallet/history";
+    public ResponseEntity<List<Transaction>> getUserTransactions() {
+        List<Transaction> transactionList = transactionService.getTransactionsDoneByUser(getConnectedUser());
+        return new ResponseEntity<>(transactionList, HttpStatus.OK);
     }
 
 

@@ -50,7 +50,6 @@ public class CurrencyPriceService {
         LocalDateTime dateTime = startDateTime;
         double price = startPrice;
 
-        System.out.println("Generating random prices for currency " + currency.getTicker() + ",starting at " + startPrice + "$ from " + startDateTime + " every " + interval + " seconds");
         while (dateTime.isBefore(LocalDateTime.now())) {
             CurrencyPrice currencyPrice = new CurrencyPrice();
             currencyPrice.setCurrency(currency);
@@ -61,10 +60,8 @@ public class CurrencyPriceService {
             currencyPrice.setPrice(price);
             currencyPrice.setDateTime(dateTime);
             currencyPrices.add(currencyPrice);
-            System.out.println(currencyPrice.getCurrency().getTicker() + " price on " + currencyPrice.getDateTime() + " is " + currencyPrice.getPrice() + "$");
             dateTime = dateTime.plusSeconds(interval);
         }
-        System.out.println("Stopped generating after " + currencyPrices.size() + " iterations");
         return currencyPrices;
     }
 
@@ -73,7 +70,6 @@ public class CurrencyPriceService {
 
         LocalDateTime dateTime = startDateTime;
 
-        System.out.println("Generating linear prices for currency " + currency.getTicker() + " at " + value + "$ from " + startDateTime + " every " + interval + " seconds");
         while (dateTime.isBefore((LocalDateTime.now()))) {
             double fluctuatingValue;
             double randomValue = value * Math.random() * .3;
@@ -86,16 +82,13 @@ public class CurrencyPriceService {
             currencyPrices.add(currencyPrice);
             dateTime = dateTime.plusSeconds(interval);
         }
-        System.out.println("Stopped generating after " + currencyPrices.size() + " iterations");
         return currencyPrices;
     }
 
     @Transactional
     public void saveCurrencyPrices(List<CurrencyPrice> currencyPrices) {
         for (CurrencyPrice currencyPrice : currencyPrices) {
-            System.out.println("saving " + currencyPrice.getId() + "///" + currencyPrice.getPrice());
             currencyPrice = currencyPriceRepository.save(currencyPrice);
-            System.out.println("saving " + currencyPrice.getId() + "///" + currencyPrice.getPrice());
         }
     }
 }

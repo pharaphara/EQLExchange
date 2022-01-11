@@ -201,12 +201,10 @@ public class BootStrapData implements CommandLineRunner {
         //AUTOMATED ASSET GENERATION
         for (User user : userRepository.findAll()) {
             if (user.getId() > 1) {
-                System.out.println("Creating assets and trade orders for " + user.getUsername());
                 for (Currency currency : currencyRepository.findAll()) {
                     Asset asset = new Asset();
                     double randomAmount = Math.random() * 10000 / currencyPriceService.getLatestPriceOFCurrency(currency).getPrice();
                     assetRepository.save(Asset.builder().user(user).currency(currency).balance(randomAmount).build());
-                    System.out.println(" - " + currency.getTicker() + " asset: " + randomAmount + " " + currency.getTicker());
 
                 }
             }
@@ -220,7 +218,6 @@ public class BootStrapData implements CommandLineRunner {
         //AUTOMATED TRADE ORDER GENERATION
         for (User user : userRepository.findAll()) {
             if (user.getId() > 1) {
-                System.out.println("Creating assets and trade orders for " + user.getUsername());
                 for (Currency currency : currencyRepository.findAll()) {
                     int randomCurrencyId = currency.getId();
                     while (randomCurrencyId == currency.getId()) {
@@ -229,9 +226,6 @@ public class BootStrapData implements CommandLineRunner {
                     Currency randomCurrency = currencyRepository.findById(randomCurrencyId).get();
                     double randomAmountToSell = assetRepository.getAssetByUserAndCurrency(user, currency).getBalance() * Math.random();
                     double calculatedAmountToBuy = currencyService.getCurrencyAmountIn(randomCurrency, currency, randomAmountToSell);
-                    System.out.println("   - trade order for " + currency.getTicker() + ":");
-                    System.out.println("   - Sell " + randomAmountToSell + " " + currency.getTicker());
-                    System.out.println("   - Buy " + calculatedAmountToBuy + " " + randomCurrency.getTicker());
 
 
                     TradeOrder tradeOrder = TradeOrder.builder()
@@ -245,14 +239,9 @@ public class BootStrapData implements CommandLineRunner {
 
                     tradeOrder = tradeOrderService.place(tradeOrder);
 
-                    System.out.println("Trade order placed");
                     List<TradeOrder> matchingTradeOrders = tradeOrderService.match(tradeOrder);
 
                     if (matchingTradeOrders.size() > 0) {
-                        for (TradeOrder matchingTradeOrder : matchingTradeOrders) {
-                            System.out.println("maaatch: " + matchingTradeOrder.getId());
-                        }
-
                         TradeOrder selectedTradeOrder = tradeOrderService.selectBestAmong(tradeOrder, matchingTradeOrders);
                         transactionService.executeFromTradeOrders(tradeOrder, selectedTradeOrder);
                     }
