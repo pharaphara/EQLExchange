@@ -1,5 +1,7 @@
 package fr.eql.al36.spring.projet.eqlexchange.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
@@ -18,6 +20,7 @@ public class CurrencyType {
     @Column(unique = true, nullable = false)
     private String name;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "currencyType")
     Set<Currency> currencies;
 

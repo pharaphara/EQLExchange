@@ -1,5 +1,6 @@
 package fr.eql.al36.spring.projet.eqlexchange.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -25,6 +26,7 @@ public class Asset {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "asset")
     private Set<Payment> payments;
 

@@ -1,5 +1,6 @@
 package fr.eql.al36.spring.projet.eqlexchange.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import fr.eql.al36.spring.projet.eqlexchange.repository.TradeOrderRepository;
 import lombok.*;
 
@@ -26,9 +27,11 @@ public class Transaction {
     @Column(unique = true, nullable = false)
     private String txId;
 
+
     @ManyToOne
     @JoinColumn(name = "source_asset_id")
     private Asset sourceAsset;
+
 
     @ManyToOne
     @JoinColumn(name = "target_asset_id")

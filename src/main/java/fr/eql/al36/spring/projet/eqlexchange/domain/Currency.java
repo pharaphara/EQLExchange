@@ -1,5 +1,7 @@
 package fr.eql.al36.spring.projet.eqlexchange.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
@@ -32,20 +34,24 @@ public class Currency {
 
     private String circulatingSupply;
 
+
     @ManyToOne
     @JoinColumn(name = "currency_type_id")
     private CurrencyType currencyType;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "currencyToBuy")
     private Set<TradeOrder> buyTradeOrders;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "currencyToSell")
     private Set<TradeOrder> sellTradeOrders;
 
-
+    @JsonIgnore
     @OneToMany(mappedBy = "currency")
     private Set<Asset> assets;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "currency")
     private List<CurrencyPrice> currencyPrices;
 

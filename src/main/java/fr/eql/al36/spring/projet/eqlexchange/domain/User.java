@@ -1,5 +1,6 @@
 package fr.eql.al36.spring.projet.eqlexchange.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -41,12 +42,15 @@ public class User {
     @Column(unique = true, nullable = false)
     private String walletAddress;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "user")
     Set<Asset> assets;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "user")
     List<TradeOrder> tradeOrders;
 
+    @JsonIgnore
     @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(name = "user_authority", joinColumns = {
             @JoinColumn(name = "user_id", referencedColumnName = "id")}, inverseJoinColumns = {

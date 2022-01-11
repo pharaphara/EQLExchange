@@ -1,5 +1,6 @@
 package fr.eql.al36.spring.projet.eqlexchange.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -31,13 +32,16 @@ public class TradeOrder {
     @Column(nullable = false)
     private double amountToBuy;
 
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
+
     @ManyToOne
     @JoinColumn(name = "currency_to_buy_id")
     private Currency currencyToBuy;
+
 
     @ManyToOne
     @JoinColumn(name = "currency_to_sell_id")

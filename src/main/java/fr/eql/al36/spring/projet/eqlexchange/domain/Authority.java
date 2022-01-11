@@ -1,5 +1,6 @@
 package fr.eql.al36.spring.projet.eqlexchange.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -29,6 +30,7 @@ public class Authority {
     @Column(unique = true, nullable = false)
     private String role;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "authorities")
     private Set<User> users;
 
