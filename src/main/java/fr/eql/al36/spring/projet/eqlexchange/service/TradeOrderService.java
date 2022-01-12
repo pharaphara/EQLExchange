@@ -1,6 +1,7 @@
 package fr.eql.al36.spring.projet.eqlexchange.service;
 
 import fr.eql.al36.spring.projet.eqlexchange.domain.TradeOrder;
+import fr.eql.al36.spring.projet.eqlexchange.domain.User;
 import fr.eql.al36.spring.projet.eqlexchange.repository.CurrencyPriceRepository;
 import fr.eql.al36.spring.projet.eqlexchange.repository.AssetRepository;
 import fr.eql.al36.spring.projet.eqlexchange.repository.TradeOrderRepository;
@@ -10,6 +11,7 @@ import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -34,6 +36,13 @@ public class TradeOrderService {
         this.currencyService = currencyService;
     }
 
+    public List<TradeOrder> connectedUserTradeOrders(User user) {
+        return tradeOrderRepository.findAllByUser(user);
+    }
+
+    public Optional<TradeOrder> getTradeOrderById(int id) {
+        return tradeOrderRepository.findById(id);
+    }
 
     // Returns Trade Order value in reference currency (dollar by design)
     public double getReferenceValue(TradeOrder tradeOrder) {

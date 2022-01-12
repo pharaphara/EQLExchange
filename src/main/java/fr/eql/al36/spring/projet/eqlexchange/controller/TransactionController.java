@@ -80,6 +80,7 @@ public class TransactionController {
 
 
     @GetMapping("wallet/{id}/transfer")
+    // makeTransfert()
     public String makeTransfer(Model model, HttpSession session, @PathVariable String id) {
         User connectedUser = (User) session.getAttribute("sessionUser");
         Currency currency = assetService.getById(Integer.parseInt(id)).getCurrency();

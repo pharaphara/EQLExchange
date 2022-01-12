@@ -2,12 +2,13 @@ package fr.eql.al36.spring.projet.eqlexchange.controller;
 
 import fr.eql.al36.spring.projet.eqlexchange.domain.Currency;
 import fr.eql.al36.spring.projet.eqlexchange.domain.TradeOrder;
-import fr.eql.al36.spring.projet.eqlexchange.domain.Transaction;
 import fr.eql.al36.spring.projet.eqlexchange.domain.User;
-import fr.eql.al36.spring.projet.eqlexchange.repository.AssetRepository;
 import fr.eql.al36.spring.projet.eqlexchange.repository.CurrencyRepository;
-import fr.eql.al36.spring.projet.eqlexchange.repository.TradeOrderRepository;
 import fr.eql.al36.spring.projet.eqlexchange.service.*;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -15,32 +16,40 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
-@Controller
+@RestController
 @SessionAttributes("sessionUser")
 public class TradeOrderController {
 
-    private final TradeOrderRepository tradeOrderRepository;
     private final CurrencyRepository currencyRepository;
     private final CurrencyService currencyService;
     private final TradeOrderService tradeOrderService;
     private final TransactionService transactionService;
     private final CurrencyPriceService currencyPriceService;
-    private final AssetRepository assetRepository;
-    private final AssetService assetService;
+    private final UserService userService;
 
-    public TradeOrderController(TradeOrderRepository tradeOrderRepository,
-                                CurrencyRepository currencyRepository,
-                                CurrencyService currencyService, TradeOrderService tradeOrderService, TransactionService transactionService, CurrencyPriceService currencyPriceService, AssetRepository assetRepository, AssetService assetService) {
+    public TradeOrderController(CurrencyRepository currencyRepository,
+                                CurrencyService currencyService, TradeOrderService tradeOrderService, TransactionService transactionService, CurrencyPriceService currencyPriceService, UserService userService) {
 
-        this.tradeOrderRepository = tradeOrderRepository;
         this.currencyRepository = currencyRepository;
         this.currencyService = currencyService;
         this.tradeOrderService = tradeOrderService;
         this.transactionService = transactionService;
         this.currencyPriceService = currencyPriceService;
-        this.assetRepository = assetRepository;
-        this.assetService = assetService;
+        this.userService = userService;
+    }
+
+    @GetMapping("trade")
+    public ResponseEntity<List<TradeOrder>> getUserTraderOrders() {
+        List<TradeOrder> tradeOrders = tradeOrderService.connectedUserTradeOrders(getConnectedUser());
+        return new ResponseEntity<>(tradeOrders, HttpStatus.OK);
+    }
+
+    @GetMapping("trade/{id}")
+    public ResponseEntity<Optional<TradeOrder>> getTradeOrderWithId(@PathVariable("id") String id) {
+        Optional<TradeOrder> tradeOrder = tradeOrderService.getTradeOrderById(Integer.parseInt(id));
+        return new ResponseEntity<>(tradeOrder, HttpStatus.OK);
     }
 
     @GetMapping("trade/buy/{id1}")
@@ -79,5 +88,13 @@ public class TradeOrderController {
         }
 
         return trade(model, currencyToBuy.getId().toString(), session);
+    }
+
+
+    private User getConnectedUser() {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username = userDetails.getUsername();
+        User connectedUser = userService.findUserByEmail(username);
+        return connectedUser;
     }
 }

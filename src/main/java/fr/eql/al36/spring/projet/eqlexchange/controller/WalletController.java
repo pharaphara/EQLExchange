@@ -6,50 +6,51 @@ import fr.eql.al36.spring.projet.eqlexchange.domain.User;
 import fr.eql.al36.spring.projet.eqlexchange.service.AssetService;
 import fr.eql.al36.spring.projet.eqlexchange.service.CurrencyPriceService;
 import fr.eql.al36.spring.projet.eqlexchange.service.TransactionService;
+import fr.eql.al36.spring.projet.eqlexchange.service.UserService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
-@Controller
+@RestController
 public class WalletController {
 
     private final AssetService assetService;
     private final CurrencyPriceService currencyPriceService;
     private final TransactionService transactionService;
+    private final UserService userService;
 
-    public WalletController(AssetService assetService, CurrencyPriceService currencyPriceService, TransactionService transactionService) {
+    public WalletController(AssetService assetService, CurrencyPriceService currencyPriceService, TransactionService transactionService, UserService userService) {
         this.assetService = assetService;
         this.currencyPriceService = currencyPriceService;
         this.transactionService = transactionService;
+        this.userService = userService;
     }
 
-    @GetMapping("/")
-    public String getIndexPage(Model model) {
-        return "index";
+    private User getConnectedUser() {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username = userDetails.getUsername();
+        User connectedUser = userService.findUserByEmail(username);
+        return connectedUser;
     }
 
     @GetMapping("wallet")
-    public String displayWallet(Model model, HttpSession session) {
-        User connectedUser = (User) session.getAttribute("sessionUser");
-        model.addAttribute("sessionUser", connectedUser);
-        model.addAttribute("assets", assetService.getUserWallet(connectedUser));
-        return "wallet/show";
+    public ResponseEntity<List<Asset>> getUserAssets() {
+        List<Asset> assets = assetService.getUserWallet(getConnectedUser());
+        return new ResponseEntity<>(assets, HttpStatus.OK);
     }
 
     @GetMapping("wallet/{id}")
-    public String displayAsset(Model model, HttpSession session, @PathVariable String id) {
-        User connectedUser = (User) session.getAttribute("sessionUser");
-        Currency currency = assetService.getById(Integer.parseInt(id)).getCurrency();
-        Double marketCap = assetService.calculMarketCap(currency);
+    public ResponseEntity<Asset> getAssetDetails(@PathVariable String id) {
         Asset asset = assetService.getById(Integer.parseInt(id));
-        model.addAttribute("asset", asset);
-        model.addAttribute("sessionUser", connectedUser);
-        model.addAttribute("marketcap", marketCap);
-        model.addAttribute("currencyPricesJSON", currencyPriceService.getCurrencyPricesJSON(currency));
-        model.addAttribute("transactions",transactionService.getTransactionsByAsset(asset));
-        return "wallet/details";
+        return new ResponseEntity<>(asset, HttpStatus.OK);
     }
 }

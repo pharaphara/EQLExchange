@@ -22,6 +22,7 @@ public class Asset {
     @JoinColumn(name = "currency_id")
     private Currency currency;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
