@@ -6,12 +6,10 @@ import {CommonModule} from "@angular/common";
 import {DashboardModule} from "./dashboard/dashboard.module";
 import {HomeModule} from "./home/home.module";
 import {AuthGuard} from "./guards/auth.guard";
-import {WalletComponent} from "./wallet/component/wallet/wallet.component";
 
 const routes: Routes = [
-  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+  { path: 'eqlexchange', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: '', component: HomeComponent},
-  { path: 'wallet', component: WalletComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({

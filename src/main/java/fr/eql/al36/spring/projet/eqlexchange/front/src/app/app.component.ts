@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {AuthenticateService} from "./home/service/authenticate.service";
 import {interval, Observable} from "rxjs";
 
@@ -9,19 +9,15 @@ import {interval, Observable} from "rxjs";
     './app.component.css'
   ]
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
 
   title = 'ExchangeApp';
-  data$: boolean = false
-  constructor(private authenticate: AuthenticateService) {}
-
-  ngOnInit(): void {
+  @Input() data$: boolean = false
+  constructor(private authenticate: AuthenticateService) {
     this.authenticate.isAuthenticate().subscribe( (data) => {
       this.data$ = data
       console.log("helooooooooooooooooooooo" + data)
     });
   }
-
-
 
 }

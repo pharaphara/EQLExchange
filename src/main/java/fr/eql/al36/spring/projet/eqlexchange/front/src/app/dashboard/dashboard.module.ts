@@ -7,8 +7,12 @@ import {HomeComponent} from "../home/component/home/home.component";
 import {WalletComponent} from "../wallet/component/wallet/wallet.component";
 
 const routes: Routes = [
-
+  { path: '', component: HomeComponent},
+  { path: 'eqlexchange', component: DashboardComponent, canActivate: [AuthGuard] , children: [
+  { path: 'wallet', component: WalletComponent, canActivate: [AuthGuard] }
+] }
 ];
+
 
 @NgModule({
   declarations: [
