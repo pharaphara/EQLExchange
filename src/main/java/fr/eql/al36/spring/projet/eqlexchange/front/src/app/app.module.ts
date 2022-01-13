@@ -9,13 +9,13 @@ import { HttpClientModule } from '@angular/common/http';
 import {HomeModule} from "./home/home.module";
 import {RouterModule, Routes} from "@angular/router";
 import {DashboardModule} from "./dashboard/dashboard.module";
-import { WalletComponent } from './wallet/component/wallet/wallet.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import {MatSliderModule} from "@angular/material/slider";
 
 
 @NgModule({
   declarations: [
-    AppComponent,
-    WalletComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -26,6 +26,8 @@ import { WalletComponent } from './wallet/component/wallet/wallet.component';
     AppRoutingModule,
     HomeModule,
     DashboardModule,
+    NoopAnimationsModule,
+    MatSliderModule
   ],
   providers: [],
   bootstrap: [AppComponent]
