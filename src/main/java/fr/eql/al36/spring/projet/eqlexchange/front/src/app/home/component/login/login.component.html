@@ -2,7 +2,7 @@
   <div >
     <div class="modal-body">
       <div class="form-title text-center">
-        <h4>Log in to access</h4>
+        <h2>Log in to access</h2>
       </div>
       <div class="d-flex flex-column text-center">
         <form #formLogin="ngForm">
@@ -15,7 +15,7 @@
                    [(ngModel)]="login.password">
           </div>
           <button type="button"
-                  class="btn btn-info btn-block btn-round"
+                  mat-raised-button color="primary"
                   (click)="doLogin()"
                   [disabled]="!formLogin.form.valid"
                   >Login
@@ -24,8 +24,8 @@
       </div>
     </div>
     <div class="modal-footer d-flex justify-content-center">
-      <div class="signup-section">Not a member yet? <a href="#a"
-                                                       class="text-info"> Sign Up</a>.
+      <div class="signup-section">
+        Not a member yet? <a href="#a" class="text-info"> Sign Up</a>.
       </div>
     </div>
   </div>

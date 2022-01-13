@@ -8,14 +8,16 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import {HomeModule} from "./home/home.module";
 import {RouterModule, Routes} from "@angular/router";
-import {DashboardModule} from "./dashboard/dashboard.module";
+import {DashboardModule} from "./navside/dashboard.module";
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import {MatSliderModule} from "@angular/material/slider";
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

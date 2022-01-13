@@ -5,10 +5,10 @@ import {LogoutComponent} from "../logout/logout.component";
 
 @Component({
   selector: 'dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  templateUrl: './navside.component.html',
+  styleUrls: ['./navside.component.scss']
 })
-export class DashboardComponent implements OnInit {
+export class NavsideComponent implements OnInit {
 
   constructor(public dialog: MatDialog) { }
 

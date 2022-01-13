@@ -4,16 +4,14 @@ import {HomeComponent} from "./component/home/home.component";
 import {LoginComponent} from "./component/login/login.component";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {FormsModule} from "@angular/forms";
-import {AppRoutingModule} from "../app-routing.module";
 import {RouterModule, Routes} from "@angular/router";
-import {DashboardComponent} from "../dashboard/component/dashboard/dashboard.component";
-import {DashboardModule} from "../dashboard/dashboard.module";
+import {NavsideComponent} from "../navside/component/navside/navside.component";
+import {DashboardModule} from "../navside/dashboard.module";
 import {AuthGuard} from "../guards/auth.guard";
-import {MatButtonToggle} from "@angular/material/button-toggle";
 import {MatButtonModule} from "@angular/material/button";
 
 const routes: Routes = [
-  { path: 'eqlexchange', component: DashboardComponent, canActivate: [AuthGuard] }
+  { path: 'eqlexchange', component: NavsideComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({
