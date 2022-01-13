@@ -8,6 +8,9 @@ import {WalletComponent} from "../wallet/component/wallet/wallet.component";
 import {MatListModule} from "@angular/material/list";
 import {MatIconModule} from "@angular/material/icon";
 import {MatSidenavModule} from "@angular/material/sidenav";
+import { LogoutComponent } from './component/logout/logout.component';
+import {MatDialogModule} from "@angular/material/dialog";
+import {MatButtonModule} from "@angular/material/button";
 
 const routes: Routes = [
   { path: '', component: HomeComponent},
@@ -20,7 +23,8 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    DashboardComponent
+    DashboardComponent,
+    LogoutComponent
   ],
   exports: [
     DashboardComponent,
@@ -30,7 +34,9 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forRoot(routes),
     MatListModule,
+    MatDialogModule,
     MatIconModule,
+    MatButtonModule,
     MatSidenavModule,
   ]
 })

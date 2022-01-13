@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthenticateService} from "../../../home/service/authenticate.service";
+import {MatDialog} from "@angular/material/dialog";
+import {LogoutComponent} from "../logout/logout.component";
 
 @Component({
   selector: 'dashboard',
@@ -8,13 +10,18 @@ import {AuthenticateService} from "../../../home/service/authenticate.service";
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(private authenticateService: AuthenticateService ) { }
+  constructor(public dialog: MatDialog) { }
 
   ngOnInit(): void { }
 
-  logout() {
-    console.log('hello world' + sessionStorage.getItem('authToken'))
-    this.authenticateService.logout();
+  openDialog(): void {
+    const dialogRef = this.dialog.open(LogoutComponent, {
+      width: '250px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
   }
 
 }
