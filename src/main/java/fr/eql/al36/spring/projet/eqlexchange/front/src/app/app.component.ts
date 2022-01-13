@@ -1,12 +1,11 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {AuthenticateService} from "./home/service/authenticate.service";
-import {interval, Observable} from "rxjs";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: [
-    './app.component.css'
+    './app.component.scss'
   ]
 })
 export class AppComponent {
