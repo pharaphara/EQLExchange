@@ -1,0 +1,56 @@
+.popup-img {
+  width: 80%;
+  height: 90px;
+}
+
+.popup-container {
+  align-items: center;
+  text-align: center;
+}
+
+.title-page {
+  font-size: 32px;
+  font-weight: 500;
+  letter-spacing: unset;
+  color: white;
+}
+
+.cards-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.title-container {
+  padding: 50px 0 20px 50px;
+}
+
+.resume-card {
+  margin: 10px ;
+}
+
+mat-card {
+  background-color: #142028;
+  color: lightgrey;
+  max-height: 300px;
+}
+
+mat-card-subtitle {
+  color: lightgray;
+}
+
+.around-logo {
+  position: relative;
+  float: right;
+  bottom: 66px;
+}
+
+mat-divider {
+  border-color: #aaebf1;
+}
+
+.description {
+  text-align: center;
+  clear: right;
+}

@@ -24,7 +24,7 @@ export class AuthenticateService {
         tap((loginResponse)=>{
           this.saveToken(loginResponse);
           this.isAuthenticated = true;
-          this.router.navigate(['eqlexchange']);
+          this.router.navigate(['eqlexchange/dashboard']);
         }
         )
       );

@@ -8,10 +8,14 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import {HomeModule} from "./home/home.module";
 import {RouterModule, Routes} from "@angular/router";
-import {DashboardModule} from "./navside/dashboard.module";
+import {NavsideModule} from "./navside/navside.module";
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import {MatSliderModule} from "@angular/material/slider";
 import { DashboardComponent } from './dashboard/dashboard.component';
+import {MatCardModule} from "@angular/material/card";
+import {MatIconModule} from "@angular/material/icon";
+import {MatButtonModule} from "@angular/material/button";
+import {MatDividerModule} from "@angular/material/divider";
 
 
 @NgModule({
@@ -27,9 +31,13 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     HttpClientModule,
     AppRoutingModule,
     HomeModule,
-    DashboardModule,
+    NavsideModule,
     NoopAnimationsModule,
-    MatSliderModule
+    MatSliderModule,
+    MatCardModule,
+    MatIconModule,
+    MatButtonModule,
+    MatDividerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -6,7 +6,7 @@ import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {FormsModule} from "@angular/forms";
 import {RouterModule, Routes} from "@angular/router";
 import {NavsideComponent} from "../navside/component/navside/navside.component";
-import {DashboardModule} from "../navside/dashboard.module";
+import {NavsideModule} from "../navside/navside.module";
 import {AuthGuard} from "../guards/auth.guard";
 import {MatButtonModule} from "@angular/material/button";
 
@@ -27,7 +27,7 @@ const routes: Routes = [
     CommonModule,
     NgbModule,
     FormsModule,
-    DashboardModule,
+    NavsideModule,
     RouterModule.forRoot(routes),
     MatButtonModule
   ]
