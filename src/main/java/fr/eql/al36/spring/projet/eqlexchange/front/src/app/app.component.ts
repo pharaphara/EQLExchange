@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {AuthenticateService} from "./home/service/authenticate.service";
+import {interval, Observable} from "rxjs";
 
 @Component({
   selector: 'app-root',
@@ -7,6 +9,19 @@ import { Component } from '@angular/core';
     './app.component.css'
   ]
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+
   title = 'ExchangeApp';
+  data$: boolean = false
+  constructor(private authenticate: AuthenticateService) {}
+
+  ngOnInit(): void {
+    this.authenticate.isAuthenticate().subscribe( (data) => {
+      this.data$ = data
+      console.log("helooooooooooooooooooooo" + data)
+    });
+  }
+
+
+
 }

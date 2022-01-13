@@ -8,19 +8,14 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import {HomeModule} from "./home/home.module";
 import {RouterModule, Routes} from "@angular/router";
-import {DashboardComponent} from "./dashboard/component/dashboard/dashboard.component";
-import {HomeComponent} from "./home/component/home/home.component";
 import {DashboardModule} from "./dashboard/dashboard.module";
-import {AuthGuard} from "./guards/auth.guard";
+import { WalletComponent } from './wallet/component/wallet/wallet.component';
 
-const routes: Routes = [
-  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
-  { path: '', component: HomeComponent }
-];
 
 @NgModule({
   declarations: [
     AppComponent,
+    WalletComponent,
   ],
   imports: [
     BrowserModule,
@@ -28,7 +23,7 @@ const routes: Routes = [
     RouterModule,
     FormsModule,
     HttpClientModule,
-    RouterModule.forRoot(routes),
+    AppRoutingModule,
     HomeModule,
     DashboardModule,
   ],
