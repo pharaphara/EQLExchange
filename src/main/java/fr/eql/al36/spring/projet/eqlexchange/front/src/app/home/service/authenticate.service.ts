@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Router} from "@angular/router";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {Observable, tap} from "rxjs";
+import {Observable, of, tap} from "rxjs";
 import {Login} from "../model/login";
 import {LoginResponse} from "../model/LogResponse";
 
@@ -30,19 +30,20 @@ export class AuthenticateService {
       );
   }
 
-  public isAuthenticate() {
+  public isAuthenticate(): Observable<boolean> {
     if(sessionStorage.getItem('authToken') != null) {
-      return true;
+      return of(true);
     } else {
-      return false;
+      return of(false);
     }
-
   }
 
   public logout() {
     sessionStorage.clear();
     this.isAuthenticated = false;
+    this.isAuthenticate();
     this.router.navigate(['']);
+    console.log("je me decoooooooooooooooo");
   }
 
   private saveToken(loginResponse:LoginResponse){

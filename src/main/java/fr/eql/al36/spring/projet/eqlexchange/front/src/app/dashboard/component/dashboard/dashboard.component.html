@@ -13,10 +13,10 @@
       <hr>
       <ul class="list-unstyled components mb-5">
         <li class="active">
-          <a href="#"><span class="fa fa-home mr-3"></span><span class="nav-icon-attribute">Home</span></a>
+          <a href="dashboard"><span class="fa fa-home mr-3"></span><span class="nav-icon-attribute">Home</span></a>
         </li>
         <li>
-          <a href="#" ><i class="fa fa-archive" aria-hidden="true"></i><span class="nav-icon-attribute">Wallet</span></a>
+          <a routerLink="wallet" ><i class="fa fa-archive" aria-hidden="true"></i><span class="nav-icon-attribute">Wallet</span></a>
         </li>
         <li>
           <a href="#"><i class="fa fa-exchange"></i><span class="nav-icon-attribute">Transactions</span></a>
@@ -41,7 +41,7 @@
     </nav>
 
     <div id="content">
-      <div> hello world</div>
+      <router-outlet></router-outlet>
     </div>
   </div>
 </div>
