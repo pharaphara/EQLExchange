@@ -4,6 +4,8 @@ html {
   scroll-behavior: smooth;
 }
 
+
+
 body {
   font-family: "DM Sans", sans-serif;
   font-weight: normal;
@@ -11,6 +13,7 @@ body {
   color: #727272;
   overflow-x: hidden;
   font-size: 15px;
+  background-color: #0b1217 !important;
 }
 
 p {
@@ -1055,6 +1058,7 @@ img {
 .header .button {
   display: inline-block;
   margin-left: 10px;
+  margin-bottom: 15px;
 }
 
 @media (max-width: 767px) {
@@ -1075,8 +1079,8 @@ img {
 }
 
 .sticky .button .btn {
-  background-color: #3E80FF;
-  color: #fff;
+  background-color: #fff;
+  color: #24126A;
 }
 
 .sticky .button .btn:hover {
@@ -1109,8 +1113,9 @@ img {
 ========================================*/
 .hero-area {
   position: relative;
-  background-color: black;
+  background-color: #0b1217;
   padding: 180px 0 127px 0;
+  border: solid 5px #0b1217;
 }
 
 .hero-area .hero-shape {
@@ -1204,10 +1209,14 @@ img {
     width: 100%;
   }
 }
+.hero-area .hero-content .button .btn {
+  color:  #24126A;
+  background-color: white;
+}
 
 .hero-area .hero-content .button .btn:hover {
-  color: #24126A;
-  background-color: #fff;
+  color: white;
+  background-color: #3E80FF;
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1199px) {

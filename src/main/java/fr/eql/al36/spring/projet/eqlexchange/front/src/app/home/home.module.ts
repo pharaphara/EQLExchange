@@ -9,6 +9,8 @@ import {RouterModule, Routes} from "@angular/router";
 import {DashboardComponent} from "../dashboard/component/dashboard/dashboard.component";
 import {DashboardModule} from "../dashboard/dashboard.module";
 import {AuthGuard} from "../guards/auth.guard";
+import {MatButtonToggle} from "@angular/material/button-toggle";
+import {MatButtonModule} from "@angular/material/button";
 
 const routes: Routes = [
   { path: 'eqlexchange', component: DashboardComponent, canActivate: [AuthGuard] }
@@ -29,6 +31,7 @@ const routes: Routes = [
     FormsModule,
     DashboardModule,
     RouterModule.forRoot(routes),
+    MatButtonModule
   ]
 })
 export class HomeModule { }
