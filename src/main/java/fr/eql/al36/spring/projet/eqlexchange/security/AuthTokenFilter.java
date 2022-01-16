@@ -20,7 +20,7 @@ import org.springframework.web.filter.GenericFilterBean;
 public class AuthTokenFilter extends GenericFilterBean {
 
     private UserDetailsService customUserDetailsService;
-    private String authTokenHeaderName = "x-auth-token";
+    private String authTokenHeaderName = "Authorization";
 
     public AuthTokenFilter(UserDetailsService userDetailsService) {
         this.customUserDetailsService = userDetailsService;
@@ -35,18 +35,20 @@ public class AuthTokenFilter extends GenericFilterBean {
 
             if (StringUtils.hasText(authToken)) {
                 String username = JwtUtil.getUserNameFromToken(authToken);
-
                 UserDetails userDetails = customUserDetailsService.loadUserByUsername(username);
 
                 if (JwtUtil.validateToken(authToken, userDetails)) {
+
                     UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(userDetails,
                             userDetails.getPassword(), userDetails.getAuthorities());
+                    System.out.println("Je suis passssssséééééééééééééééééééééé");
                     SecurityContextHolder.getContext().setAuthentication(token);
                 }
             }
 
             filterChain.doFilter(servletRequest, servletResponse);
         } catch (Exception ex) {
+            System.out.println("Je me suis fait attrapéééééééééééééééééééééééééééééééééé");
             throw new RuntimeException(ex);
         }
     }

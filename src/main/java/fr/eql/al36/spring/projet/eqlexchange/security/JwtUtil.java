@@ -37,6 +37,7 @@ public class JwtUtil {
         if (authToken == null) {
             return null;
         }
+        authToken = authToken.substring(7);
         String[] parts = authToken.split(":");
         return parts[0];
     }

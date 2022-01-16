@@ -9,8 +9,10 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -19,27 +21,31 @@ public class MyConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private JpaUserDetailsService userDetailsService;
 
+    @Autowired
+    AuthTokenFilter authTokenFilter;
+
+    @Autowired
+    NoAuthenticatePoint noAuthenticatePoint;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.cors().disable();
-        http.csrf().disable().authorizeRequests()
+        http.authorizeRequests()
                 .antMatchers("/authenticate").permitAll()
                 .antMatchers("/").permitAll()
-                .antMatchers("/access-denied").permitAll()
                 .antMatchers("/css/**").permitAll()
                 .antMatchers("/img/**").permitAll()
                 .antMatchers("/js/**").permitAll()
                 .antMatchers("/user/**",
                              "/currency/**",
+                             "/api/user",
                              "/transaction/**",
-                             "/hello",
-                             "/wallet/**").hasRole("USER")
-                .anyRequest().authenticated()
+                             "/wallet/**").authenticated()
+                .and().cors()
+                .and().csrf().disable()
+                .exceptionHandling().authenticationEntryPoint(noAuthenticatePoint)
                 .and()
-                .formLogin().loginPage("/login").defaultSuccessUrl("/hello").failureUrl("/login?error=true").permitAll()
-                .and()
-                .logout().deleteCookies("JSESSIONID").logoutUrl("/logout").logoutSuccessUrl("/login");
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and().addFilterBefore(authTokenFilter, UsernamePasswordAuthenticationFilter.class);
 
     }
 
