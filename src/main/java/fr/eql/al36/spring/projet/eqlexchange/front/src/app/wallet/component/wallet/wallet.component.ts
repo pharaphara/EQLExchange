@@ -1,7 +1,7 @@
+import {HttpErrorResponse} from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import {Asset} from "../../state/asset";
-import {AssetService} from "../../service/asset.service";
-import {HttpErrorResponse} from "@angular/common/http";
+import {AssetService} from '../../service/asset.service';
+import {Asset} from '../../state/asset';
 
 @Component({
   selector: 'app-wallet',
@@ -14,7 +14,7 @@ export class WalletComponent implements OnInit {
 
   constructor(private assetService: AssetService) { }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.getAssets();
   }
 
@@ -22,12 +22,11 @@ export class WalletComponent implements OnInit {
     this.assetService.getAssets().subscribe(
       (response: Asset[]) => {
         this.assets = response || [];
-        console.log(this.assets)
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
-      }
-    )
+      },
+    );
   }
 
 }
