@@ -16,15 +16,15 @@ export class ChartComponent implements OnInit, AfterViewInit {
   constructor() {
   }
 
-  ngAfterViewInit(): void {
+  public ngAfterViewInit(): void {
     this.data$ = fetch(`https://api.binance.com/api/v3/klines?symbol=${this.symbolPair}&interval=1m&limit=1000`);
-    this.dochart()
+    this.dochart();
   }
 
-  ngOnInit(): void {}
+  public ngOnInit(): void {};
 
 
-  price: number | undefined
+  public price: number | undefined ;
 
   dochart() {
 
