@@ -1,7 +1,5 @@
 import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
 import {createChart} from 'lightweight-charts';
-import {from, map, Observable} from "rxjs";
-import * as io from 'socket.io-client';
 
 @Component({
   selector: 'app-chart',
@@ -10,14 +8,16 @@ import * as io from 'socket.io-client';
 })
 export class ChartComponent implements OnInit, AfterViewInit {
 
-  private symbolPair: string = 'BNBUSDT';
+  @Input()
+  public symbolPair!: string;
 
-  public data$: Promise<any> = fetch(`https://api.binance.com/api/v3/klines?symbol=${this.symbolPair}&interval=1m&limit=1000`);
+  public data$!: Promise<any>;
 
   constructor() {
   }
 
   ngAfterViewInit(): void {
+    this.data$ = fetch(`https://api.binance.com/api/v3/klines?symbol=${this.symbolPair}&interval=1m&limit=1000`);
     this.dochart()
   }
 

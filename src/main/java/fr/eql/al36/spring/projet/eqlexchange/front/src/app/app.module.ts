@@ -17,6 +17,8 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
 import {MatDividerModule} from "@angular/material/divider";
 import { ChartComponent } from './chart/chart.component';
+import {CommonModule} from "@angular/common";
+import {WalletModule} from "./wallet/wallet.module";
 
 
 @NgModule({
@@ -27,6 +29,8 @@ import { ChartComponent } from './chart/chart.component';
   ],
   imports: [
     BrowserModule,
+    CommonModule,
+    WalletModule,
     NgbModule,
     RouterModule,
     FormsModule,
