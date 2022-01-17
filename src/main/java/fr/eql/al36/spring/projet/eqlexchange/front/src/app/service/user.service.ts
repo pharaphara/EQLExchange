@@ -22,9 +22,7 @@ export class UserService {
   constructor(private http: HttpClient, private authService: AuthenticateService) { }
 
   public getCurrentUser(): Observable<User> {
-    return this.http.get<User>(this.apiURL+`api/user?email=${this.userEmail}`, httpOptions).pipe(
-      catchError(e => throwError(this.errorHandler(e))
-  ))
+    return this.http.get<User>(this.apiURL+`api/user?email=${this.userEmail}`, httpOptions);
   }
 
   errorHandler(error: any) {
