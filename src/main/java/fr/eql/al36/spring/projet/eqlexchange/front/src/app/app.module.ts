@@ -20,6 +20,7 @@ import { ChartComponent } from './chart/chart.component';
 import {CommonModule} from "@angular/common";
 import {WalletModule} from "./wallet/wallet.module";
 import { ExplorerComponent } from './explorer/explorer.component';
+import {MatTableModule} from "@angular/material/table";
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { ExplorerComponent } from './explorer/explorer.component';
     MatCardModule,
     MatIconModule,
     MatButtonModule,
-    MatDividerModule
+    MatDividerModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]

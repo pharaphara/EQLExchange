@@ -13,6 +13,7 @@ import {MatDialogModule} from "@angular/material/dialog";
 import {MatButtonModule} from "@angular/material/button";
 import {DashboardComponent} from "../dashboard/dashboard.component";
 import {ExplorerComponent} from "../explorer/explorer.component";
+import {ExplorerModule} from "../explorer/explorer.module";
 
 const routes: Routes = [
   { path: '', component: HomeComponent},
@@ -37,6 +38,7 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forRoot(routes),
     MatListModule,
+    ExplorerModule,
     MatDialogModule,
     MatIconModule,
     MatButtonModule,
