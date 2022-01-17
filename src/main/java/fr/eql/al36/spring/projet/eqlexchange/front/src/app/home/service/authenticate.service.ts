@@ -14,6 +14,7 @@ export class AuthenticateService {
   private authenticateURL = 'http://localhost:8085/authenticate';
   private _headers = new HttpHeaders({'Content-Type': 'application/json'});
   public isAuthenticated: boolean = false;
+  public token: string = '';
 
   constructor(private http : HttpClient, private router: Router) { }
 
@@ -28,6 +29,7 @@ export class AuthenticateService {
         }
         )
       );
+
   }
 
   public isAuthenticate(): Observable<boolean> {
@@ -38,20 +40,28 @@ export class AuthenticateService {
     }
   }
 
+  public getToken(){
+    return sessionStorage.getItem('authToken');
+  }
+
   public logout() {
     sessionStorage.clear();
     this.isAuthenticated = false;
     this.isAuthenticate();
+    this.token = '';
     this.router.navigate(['']);
   }
 
   private saveToken(loginResponse:LoginResponse){
-    if(loginResponse.ok){
+    if(loginResponse != null){
       this.currentRole = "ROLE_USER";
+      this.token = loginResponse.token;
       sessionStorage.setItem('authToken',loginResponse.token);
+      sessionStorage.setItem('email', loginResponse.email);
     }
     else{
       sessionStorage.setItem('authToken',"");
+      sessionStorage.setItem('email', "");
       this.currentRole = "?";
     }
   }
