@@ -21,7 +21,7 @@ const routes: Routes = [
   { path: 'eqlexchange', component: NavsideComponent, canActivate: [AuthGuard] , children: [
       { path: 'wallet', component: WalletComponent, canActivate: [AuthGuard] },
       { path: 'explorer', component: ExplorerComponent, canActivate: [AuthGuard]},
-      { path: 'trade/:id', component: TradeComponent, canActivate: [AuthGuard] },
+      { path: 'explorer/trade/:id', component: TradeComponent, canActivate: [AuthGuard] },
       { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] }
 ] }
 ];

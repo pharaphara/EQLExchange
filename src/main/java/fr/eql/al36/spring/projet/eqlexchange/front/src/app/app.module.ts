@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import {HomeModule} from "./home/home.module";
 import {RouterModule, Routes} from "@angular/router";
@@ -22,6 +22,9 @@ import {WalletModule} from "./wallet/wallet.module";
 import { ExplorerComponent } from './explorer/explorer.component';
 import {MatTableModule} from "@angular/material/table";
 import { TradeComponent } from './trade/trade.component';
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatRadioModule} from "@angular/material/radio";
+import {TradeModule} from "./trade/trade.module";
 
 
 @NgModule({
@@ -39,6 +42,7 @@ import { TradeComponent } from './trade/trade.component';
     NgbModule,
     RouterModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
     HomeModule,
@@ -49,7 +53,11 @@ import { TradeComponent } from './trade/trade.component';
     MatIconModule,
     MatButtonModule,
     MatDividerModule,
-    MatTableModule
+    MatTableModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatRadioModule,
+    TradeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

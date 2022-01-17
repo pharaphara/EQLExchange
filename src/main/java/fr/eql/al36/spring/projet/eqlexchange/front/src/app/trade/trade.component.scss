@@ -1,3 +1,54 @@
 .chart-cont {
-  margin-left: 30px;
+  margin-left: 10px;
+}
+
+mat-card-title {
+  padding: 10px;
+}
+
+.trade-container {
+  display: flex;
+  flex-direction: row;
+  color: white;
+  justify-content: center;
+}
+
+mat-radio-button {
+  font-size: 18px;
+  padding: 10px;
+}
+
+mat-card {
+  background-color: #142028;
+  width: 30%;
+  margin-left: 20px;
+}
+
+.form-container {
+  color: white;
+  justify-items: center;
+}
+
+
+.element-form {
+  padding: 10px;
+}
+
+.btn-submit {
+  text-align: center;
+  padding: 10px;
+}
+
+.btn-submit button.mat-primary{
+  width: 200px;
+}
+
+.btn-submit  button.mat-warn{
+  width: 200px;
+}
+
+.input-form {
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
 }

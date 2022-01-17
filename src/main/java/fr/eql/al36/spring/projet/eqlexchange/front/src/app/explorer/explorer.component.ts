@@ -26,7 +26,7 @@ export class ExplorerComponent implements OnInit {
   }
 
   onSelect(element: any) {
-    this.router.navigate(['eqlexchange/trade', element.id]);
+    this.router.navigate(['eqlexchange/explorer/trade', element.id]);
   }
 
 }

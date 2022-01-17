@@ -1,5 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
+import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
+import {TradeOrder} from "./state/trade-order";
+import {TradeModule} from "./trade.module";
+import {TradeOrderService} from "./state/service/trade-order.service";
+import {HttpErrorResponse} from "@angular/common/http";
+
+const currency = {
+
+}
 
 @Component({
   selector: 'app-trade',
@@ -8,12 +17,40 @@ import {ActivatedRoute} from "@angular/router";
 })
 export class TradeComponent implements OnInit {
 
+  public tradeOrder!: TradeOrder;
+  public form!: FormGroup;
   public currencyId!: number;
-  constructor(private route: ActivatedRoute) { }
+  typeControl = new FormControl('BID');
+
+  constructor(private route: ActivatedRoute, private tradeOrderService: TradeOrderService) {
+
+  }
 
   ngOnInit(): void {
+    this.form = new FormGroup( {
+      email: new FormControl(sessionStorage.getItem('email')),
+      pair: new FormControl('BTC_USDT'),
+      type: this.typeControl,
+      amount: new FormControl(),
+      limit: new FormControl()
+
+    })
     let id = parseInt(<string>this.route.snapshot.paramMap.get('id'));
     this.currencyId = id;
+  }
+
+  sendTradeOrder() {
+    console.log(this.form.value);
+    this.tradeOrderService.addTradeOrder(this.form.value).subscribe(
+
+      (response: TradeOrder) => {
+        console.log(response)
+      },
+      (error: HttpErrorResponse) => {
+        alert(error)
+      }
+    )
+
   }
 
 }
