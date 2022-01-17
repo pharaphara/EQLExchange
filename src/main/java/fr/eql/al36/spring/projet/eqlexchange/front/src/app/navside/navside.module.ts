@@ -14,12 +14,14 @@ import {MatButtonModule} from "@angular/material/button";
 import {DashboardComponent} from "../dashboard/dashboard.component";
 import {ExplorerComponent} from "../explorer/explorer.component";
 import {ExplorerModule} from "../explorer/explorer.module";
+import {TradeComponent} from "../trade/trade.component";
 
 const routes: Routes = [
   { path: '', component: HomeComponent},
   { path: 'eqlexchange', component: NavsideComponent, canActivate: [AuthGuard] , children: [
       { path: 'wallet', component: WalletComponent, canActivate: [AuthGuard] },
-      { path: 'explorer', component: ExplorerComponent, canActivate: [AuthGuard] },
+      { path: 'explorer', component: ExplorerComponent, canActivate: [AuthGuard]},
+      { path: 'trade/:id', component: TradeComponent, canActivate: [AuthGuard] },
       { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] }
 ] }
 ];

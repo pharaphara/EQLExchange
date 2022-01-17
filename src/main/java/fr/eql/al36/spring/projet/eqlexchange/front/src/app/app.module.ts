@@ -21,6 +21,7 @@ import {CommonModule} from "@angular/common";
 import {WalletModule} from "./wallet/wallet.module";
 import { ExplorerComponent } from './explorer/explorer.component';
 import {MatTableModule} from "@angular/material/table";
+import { TradeComponent } from './trade/trade.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import {MatTableModule} from "@angular/material/table";
     AppComponent,
     DashboardComponent,
     ChartComponent,
-    ExplorerComponent
+    ExplorerComponent,
+    TradeComponent
   ],
   imports: [
     BrowserModule,
