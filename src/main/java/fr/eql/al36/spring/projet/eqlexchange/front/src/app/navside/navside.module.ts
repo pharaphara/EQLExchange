@@ -12,12 +12,13 @@ import { LogoutComponent } from './component/logout/logout.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatButtonModule} from "@angular/material/button";
 import {DashboardComponent} from "../dashboard/dashboard.component";
+import {ExplorerComponent} from "../explorer/explorer.component";
 
 const routes: Routes = [
   { path: '', component: HomeComponent},
   { path: 'eqlexchange', component: NavsideComponent, canActivate: [AuthGuard] , children: [
       { path: 'wallet', component: WalletComponent, canActivate: [AuthGuard] },
-      { path: 'eqlexchange', component: NavsideComponent, canActivate: [AuthGuard] },
+      { path: 'explorer', component: ExplorerComponent, canActivate: [AuthGuard] },
       { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] }
 ] }
 ];

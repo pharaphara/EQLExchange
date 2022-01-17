@@ -19,13 +19,15 @@ import {MatDividerModule} from "@angular/material/divider";
 import { ChartComponent } from './chart/chart.component';
 import {CommonModule} from "@angular/common";
 import {WalletModule} from "./wallet/wallet.module";
+import { ExplorerComponent } from './explorer/explorer.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
-    ChartComponent
+    ChartComponent,
+    ExplorerComponent
   ],
   imports: [
     BrowserModule,
