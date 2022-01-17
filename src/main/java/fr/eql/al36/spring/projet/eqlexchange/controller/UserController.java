@@ -7,54 +7,32 @@ import fr.eql.al36.spring.projet.eqlexchange.service.AssetService;
 import fr.eql.al36.spring.projet.eqlexchange.service.CurrencyPriceService;
 import fr.eql.al36.spring.projet.eqlexchange.service.CurrencyService;
 import fr.eql.al36.spring.projet.eqlexchange.service.UserService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
-@SessionAttributes("sessionUser")
+@RestController
+@RequestMapping(value="/api")
 public class UserController {
 
     private final UserService userService;
 
-    private final AssetService assetService;
 
-    private final CurrencyService currencyService;
-
-    private final CurrencyPriceService currencyPriceService;
-
-
-    public UserController(UserService userService, AssetService assetService, CurrencyService currencyService,
-                          CurrencyPriceService currencyPriceService) {
+    public UserController(UserService userService) {
         this.userService = userService;
-        this.assetService = assetService;
-        this.currencyService = currencyService;
-        this.currencyPriceService = currencyPriceService;
     }
 
 
-    @GetMapping("user/dashboard")
-    public String displayDashboard(@AuthenticationPrincipal UserDetails userDetails, Model model) {
-        String connectedUserEmail = userDetails.getUsername();
-        User connectedUser = userService.findUserByEmail(connectedUserEmail);
-        Asset eqlAsset = assetService.getEqlAssetByUser(connectedUser);
-        List<Currency> currencies = currencyService.findAll();
-        List<Asset> assets = assetService.getAllByUser(connectedUser);
-        if(connectedUser == null) {
-            return "user/non-existent";
-        }
-        model.addAttribute("eqlasset", eqlAsset);
-        model.addAttribute("currencies", currencies);
-        model.addAttribute("sessionUser", connectedUser);
-        model.addAttribute("assets", assets);
-        model.addAttribute("currencyPricesJSON",
-                           currencyPriceService.getCurrencyPricesJSON(currencyService.findCurrencyById(5)));
-        return "user/dashboard";
+    @GetMapping("/user")
+    public ResponseEntity<User> displayDashboard(@RequestParam(value = "email") String email) {
+        User user = userService.findUserByEmail(email);
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
 

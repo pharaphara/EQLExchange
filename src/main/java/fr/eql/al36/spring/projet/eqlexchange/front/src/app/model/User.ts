@@ -1,6 +1,10 @@
-export class User{
+export interface  User{
 
-  email: string | undefined ;
-  password: string | undefined ;
-  roles: string[] | undefined;
+  id: number;
+  firstName: string;
+  lastname: string;
+  username: string;
+  dateOfBirth: string;
+  email: string;
+  walletAdress: string;
 }

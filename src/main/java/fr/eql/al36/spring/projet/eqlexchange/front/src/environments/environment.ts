@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiWalletUrl: 'http://localhost:9090/assets-api-rest'
+  apiWalletUrl: 'http://localhost:9090/assets-api-rest',
+  backEnd: 'http://localhost:8085/'
 };
 
 /*
