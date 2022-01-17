@@ -15,24 +15,24 @@
 
     <form [formGroup]="form" class="normal-form" (ngSubmit)="sendTradeOrder()" >
       <div class="element-form" align="center">
-        <mat-radio-group formControlName="type">
+        <mat-radio-group formControlName="orderType">
           <mat-radio-button value="BID">Buy</mat-radio-button>
           <mat-radio-button value="ASK">Sell</mat-radio-button>
         </mat-radio-group>
       </div>
       <div class="input-form">
-        <mat-label *ngIf="form.get('type')!.value =='BID'">Enter amount to buy</mat-label>
-        <mat-label *ngIf="form.get('type')!.value =='ASK'">Enter amount to sell</mat-label>
+        <mat-label *ngIf="form.get('orderType')!.value =='BID'">Enter amount to buy</mat-label>
+        <mat-label *ngIf="form.get('orderType')!.value =='ASK'">Enter amount to sell</mat-label>
         <input formControlName="amount" class="form-control" placeholder="Amount" required >
       </div>
       <div class="input-form">
         <mat-label>Enter your limit price</mat-label>
-        <input formControlName="limit" class="form-control" placeholder="Limit price" required>
+        <input formControlName="limitPrice" class="form-control" placeholder="Limit price" required>
       </div>
       <div class="btn-submit">
-        <button *ngIf="form.get('type')!.value =='BID'"
+        <button *ngIf="form.get('orderType')!.value =='BID'"
                 type="submit" mat-raised-button color="primary" >BUY</button>
-        <button *ngIf="form.get('type')!.value =='ASK'"
+        <button *ngIf="form.get('orderType')!.value =='ASK'"
                 type="submit" mat-raised-button color="warn" >SELL</button>
       </div>
     </form>

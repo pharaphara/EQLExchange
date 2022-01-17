@@ -2,9 +2,9 @@ import {OrderType} from "../../model/enum/order-type";
 import {TradingPair} from "../../model/enum/trading-pair";
 
 export interface TradeOrder {
-  email: string;
-  pair: TradingPair;
-  type: OrderType;
+  user: string;
+  currencyPair: TradingPair;
+  orderType: OrderType;
   amount: number;
-  limit: number;
+  limitPrice: number;
 }

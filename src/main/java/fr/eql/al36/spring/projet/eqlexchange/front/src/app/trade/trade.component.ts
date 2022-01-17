@@ -28,11 +28,11 @@ export class TradeComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = new FormGroup( {
-      email: new FormControl(sessionStorage.getItem('email')),
-      pair: new FormControl('BTC_USDT'),
-      type: this.typeControl,
+      user: new FormControl(sessionStorage.getItem('email')),
+      currencyPair: new FormControl('BTC_EUR'),
+      orderType: this.typeControl,
       amount: new FormControl(),
-      limit: new FormControl()
+      limitPrice: new FormControl()
 
     })
     let id = parseInt(<string>this.route.snapshot.paramMap.get('id'));
