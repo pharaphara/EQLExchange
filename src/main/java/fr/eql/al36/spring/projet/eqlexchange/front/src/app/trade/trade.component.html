@@ -1,2 +1,11 @@
-<p>trade works!</p>
-<app-chart [symbolPair]="'BTCUSDT'" ></app-chart>
+<div class="popup-container">
+  <img class="popup-img" src="/assets/img/popup/popup0.png">
+</div>
+<div class="title-container">
+  <h1 class="title-page">TRADE</h1>
+</div>
+
+<div class="chart-cont">
+  <app-chart [symbolPair]="'BTCUSDT'" [width]="900" [height]="500"></app-chart>
+</div>
+

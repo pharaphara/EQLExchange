@@ -11,6 +11,12 @@ export class ChartComponent implements OnInit, AfterViewInit {
   @Input()
   public symbolPair!: string;
 
+  @Input()
+  public width!: number;
+
+  @Input()
+  public height!: number;
+
   public data$!: Promise<any>;
 
   constructor() {
@@ -21,7 +27,10 @@ export class ChartComponent implements OnInit, AfterViewInit {
     this.dochart();
   }
 
-  public ngOnInit(): void {};
+  public ngOnInit(): void {
+    this.height;
+    this.width;
+  };
 
 
   public price: number | undefined ;
@@ -31,8 +40,8 @@ export class ChartComponent implements OnInit, AfterViewInit {
     const log = console.log;
 
     const chartProperties = {
-      width: 1300,
-      height: 600,
+      width: this.width,
+      height: this.height,
       layout: {
         backgroundColor: '#0b1217',
         lineColor: '#0dcaf0',
