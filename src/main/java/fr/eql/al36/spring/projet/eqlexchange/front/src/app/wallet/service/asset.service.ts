@@ -10,7 +10,7 @@ import {environment} from "../../../environments/environment";
 export class AssetService {
 
   private apiServer = environment.apiWalletUrl;
-  private email = 'alain.musque@yahoo.fr';
+  private email = sessionStorage.getItem('email');
 
   constructor(private http: HttpClient) { }
 
