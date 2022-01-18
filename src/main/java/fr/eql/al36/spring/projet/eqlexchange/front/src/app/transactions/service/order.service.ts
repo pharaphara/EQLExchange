@@ -19,4 +19,8 @@ export class OrderService {
     );
   }
 
+  public getOrdersByPair(pair: string): Observable<Order[]> {
+    return this.http.get<Order[]>(`${this.apiUrl}/bookOrder/Orders?pair=${pair}`);
+  }
+
 }

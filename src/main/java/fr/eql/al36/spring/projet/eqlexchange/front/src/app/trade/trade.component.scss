@@ -22,6 +22,7 @@ mat-card {
   background-color: #142028;
   width: 30%;
   margin-left: 20px;
+  border-radius: 20px;
 }
 
 .form-container {
@@ -89,3 +90,25 @@ mat-card {
 .success-container h3 {
   margin-left: 10px;
 }
+
+table {
+  width: 80%;
+  background-color: #0b1217;
+  color: white;
+  margin: 20px auto;
+}
+
+th {
+  color: #818ea3;
+  font-size: 13px;
+}
+
+td {
+  color: white;
+  font-size: 13px;
+}
+
+.mat-row:hover .mat-cell{
+  background-color: black;
+}
+
