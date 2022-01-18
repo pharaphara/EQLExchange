@@ -16,7 +16,10 @@
   <!-- Name Column -->
   <ng-container matColumnDef="Crypto">
     <th mat-header-cell *matHeaderCellDef> Crypto </th>
-    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    <td mat-cell *matCellDef="let element">
+      <img alt="logo" src="assets/logo/{{element.ticker.toLocaleLowerCase()}}.png" class="logo-crypto">
+      {{element.name}}
+    </td>
   </ng-container>
 
   <!-- Weight Column -->
