@@ -60,6 +60,12 @@
   </div>
 
   <div class="chart-container">
-    <app-chart [symbolPair]="'BNBUSDT'" [width]="1250" [height]="600"></app-chart>
+    <div class="container-pair">
+      <img alt="currency" src="/assets/logo/eur.png" class="currency-logo">
+      <img alt="currency" src="/assets/logo/btc.png" class="currency-logo">
+      <h2>EUR /</h2>
+      <h1>BTC</h1>
+    </div>
+    <app-chart [symbolPair]="'BTCUSDT'" [width]="1250" [height]="600"></app-chart>
   </div>
 </div>
