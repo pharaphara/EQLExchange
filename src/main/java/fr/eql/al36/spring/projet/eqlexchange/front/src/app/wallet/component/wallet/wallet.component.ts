@@ -13,8 +13,9 @@ import {LoginResponse} from "../../../home/model/LogResponse";
 })
 export class WalletComponent implements OnInit {
 
-  public assets: Asset[] | undefined;
+  public assets!: Asset[];
   public user!: User;
+  displayedColumns: string[] = ['Logo', 'Currency', 'Units'];
 
   constructor(private assetService: AssetService, private userService: UserService) { }
 

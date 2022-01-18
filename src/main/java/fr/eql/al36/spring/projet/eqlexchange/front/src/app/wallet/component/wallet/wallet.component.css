@@ -1,0 +1,26 @@
+table {
+    width: 80%;
+    background-color: #142028;
+    color: white;
+    margin: 0 auto;
+  }
+  
+  th {
+    color: white;
+    font-size: 22px;
+  }
+  
+  td {
+    color: white;
+    font-size: 18px;
+  }
+  
+  .btn-trade {
+    padding: 0 10px;
+  }
+  
+  .image{
+      width: 40px;
+      height: 40px;
+      margin-left: 5px;
+  }
