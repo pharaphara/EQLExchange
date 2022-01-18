@@ -41,6 +41,7 @@ mat-card {
 
 .btn-submit button.mat-primary{
   width: 200px;
+  background-color: #17c671 !important;
 }
 
 .btn-submit  button.mat-warn{
@@ -51,4 +52,20 @@ mat-card {
   align-items: center;
   justify-content: center;
   padding: 20px;
+}
+
+.success-container {
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+.done-logo {
+  color: #17c671;
+}
+
+.success-container h3 {
+  margin-left: 10px;
 }

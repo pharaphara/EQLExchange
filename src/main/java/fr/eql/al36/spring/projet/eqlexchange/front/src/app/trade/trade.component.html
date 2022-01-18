@@ -36,7 +36,10 @@
                 type="submit" mat-raised-button color="warn" >SELL</button>
       </div>
     </form>
-
+    <div *ngIf="isTransfer" class="success-container">
+      <mat-icon class="done-logo">check_circle_outline</mat-icon>
+      <h3>Successfully ! </h3>
+    </div>
   </mat-card>
 </div>
 

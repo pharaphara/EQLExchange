@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
-import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
+import {FormControl, FormGroup} from "@angular/forms";
 import {TradeOrder} from "./state/trade-order";
-import {TradeModule} from "./trade.module";
 import {TradeOrderService} from "./state/service/trade-order.service";
 import {HttpErrorResponse} from "@angular/common/http";
 
@@ -17,7 +16,7 @@ const currency = {
 })
 export class TradeComponent implements OnInit {
 
-  public tradeOrder!: TradeOrder;
+  public isTransfer: boolean = false;
   public form!: FormGroup;
   public currencyId!: number;
   typeControl = new FormControl('BID');
@@ -27,6 +26,7 @@ export class TradeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.isTransfer = false;
     this.form = new FormGroup( {
       user: new FormControl(sessionStorage.getItem('email')),
       currencyPair: new FormControl('BTC_EUR'),
@@ -43,8 +43,8 @@ export class TradeComponent implements OnInit {
     console.log(this.form.value);
     this.tradeOrderService.addTradeOrder(this.form.value).subscribe(
 
-      (response: TradeOrder) => {
-        console.log(response)
+      (response) => {
+        this.isTransfer = true;
       },
       (error: HttpErrorResponse) => {
         alert(error)
