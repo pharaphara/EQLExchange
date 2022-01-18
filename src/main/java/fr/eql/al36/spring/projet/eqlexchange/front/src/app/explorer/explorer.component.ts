@@ -1,5 +1,9 @@
 import {Component, Directive, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
+import {Asset} from "../wallet/state/asset";
+import {HttpErrorResponse} from "@angular/common/http";
+import {Currency} from "./state/currency";
+import {CurrencyService} from "./service/currency.service";
 
 
 const ELEMENT_DATA: {}[] = [
@@ -18,15 +22,28 @@ const ELEMENT_DATA: {}[] = [
 export class ExplorerComponent implements OnInit {
 
   displayedColumns: string[] = ['#', 'Crypto', 'Price', 'Supply', 'Actions'];
-  dataSource = ELEMENT_DATA;
+  currencies!: Currency[];
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private currencyService: CurrencyService) { }
 
   ngOnInit(): void {
+    this.getAssets();
   }
 
   onSelect(element: any) {
-    this.router.navigate(['eqlexchange/explorer/trade', element.id]);
+    this.router.navigate(['eqlexchange/explorer/trade', element.ticker]);
   }
+
+  public getAssets(): void {
+    this.currencyService.getAllCurrencies().subscribe(
+      (response: Currency[]) => {
+        this.currencies = response || [];
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      },
+    );
+  }
+
 
 }

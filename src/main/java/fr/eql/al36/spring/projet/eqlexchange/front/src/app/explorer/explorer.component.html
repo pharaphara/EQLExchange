@@ -5,12 +5,12 @@
   <h1 class="title-page">TRADE OUR CRYPTO</h1>
 </div>
 
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+<table mat-table [dataSource]="currencies" class="mat-elevation-z8">
 
   <!-- Position Column -->
   <ng-container matColumnDef="#">
     <th mat-header-cell *matHeaderCellDef> # </th>
-    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    <td mat-cell *matCellDef="let element"> {{element.ticker}} </td>
   </ng-container>
 
   <!-- Name Column -->
@@ -31,12 +31,6 @@
     <td mat-cell *matCellDef="let element"> {{element.supply}} </td>
   </ng-container>
 
-  <ng-container matColumnDef="">
-    <th mat-header-cell *matHeaderCellDef></th>
-    <td mat-cell *matCellDef="let element">
-      <button mat-raised-button color="accent" routerLink="/eqlexchange/dashboard">{{element.name}}</button>
-    </td>
-  </ng-container>
   <ng-container matColumnDef="Actions">
     <th mat-header-cell  *matHeaderCellDef >  </th>
     <td mat-cell *matCellDef="let element" >

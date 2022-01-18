@@ -13,7 +13,7 @@ export class CurrencyService {
 
   constructor(private http: HttpClient) { }
 
-  public getAllCurrencies(ticker: string): Observable<Currency[]> {
+  public getAllCurrencies(): Observable<Currency[]> {
    return this.http.get<Currency[]>(`${this.apiUrl}/price/getCurrencies`)
 
   }
