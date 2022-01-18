@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {OrderService} from "./service/order.service";
+import {HttpErrorResponse} from "@angular/common/http";
+import {Order} from "./state/order";
 
 @Component({
   selector: 'app-transactions',
@@ -7,9 +10,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TransactionsComponent implements OnInit {
 
-  constructor() { }
+  displayedColumns: string[] = ['Date', 'Type', 'Pair', 'Amount', 'Status'];
+  orders!: Order[];
+
+  constructor(private orderService: OrderService) { }
 
   ngOnInit(): void {
+    this.getOrders()
+  }
+
+  public getOrders(): void {
+    this.orderService.getCurrentUserOrders().subscribe({
+        next: (response: Order[]) => {
+          this.orders = response;
+        },
+        error: (error: HttpErrorResponse) => {
+          alert(error.message);
+        }
+      }
+    );
   }
 
 }
