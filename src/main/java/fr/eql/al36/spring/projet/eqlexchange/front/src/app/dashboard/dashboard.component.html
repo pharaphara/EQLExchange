@@ -1,5 +1,5 @@
 <div class="popup-container">
-  <img class="popup-img" src="/assets/img/popup/popup.png">
+  <img alt="popup" class="popup-img" src="/assets/img/popup/popup.png">
 </div>
 
 <div class="title-container">
@@ -27,7 +27,7 @@
       <mat-card class="resume-card">
         <mat-card-title>Wallet</mat-card-title>
         <mat-card-subtitle>
-          {{user?.walletAddress!.substring(0,8) +'...'+user?.walletAddress!.substring(
+          {{user?.walletAddress?.substring(0,8) +'...'+user?.walletAddress?.substring(
           user?.walletAddress!.length - 8, user?.walletAddress!.length - 1 )}}
         </mat-card-subtitle>
         <div class="around-logo">
@@ -37,7 +37,7 @@
         </div>
         <mat-divider></mat-divider>
         <div class="description">
-          <h2>50000 $</h2>
+          <h2>{{walletAmount + ' €'}} </h2>
         </div>
       </mat-card>
     </div>
