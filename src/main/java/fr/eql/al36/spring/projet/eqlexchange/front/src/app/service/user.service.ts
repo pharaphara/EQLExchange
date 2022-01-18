@@ -6,11 +6,6 @@ import {User} from "../model/User";
 import {catchError, Observable, throwError} from "rxjs";
 
 
-const httpOptions = {
-  headers: new HttpHeaders( {'Content-Type': 'application/json',
-                                    'Authorization': 'Bearer ' + sessionStorage.getItem('authToken')
-                                    })
-};
 @Injectable({
   providedIn: 'root'
 })
@@ -18,11 +13,16 @@ export class UserService {
 
   userEmail: any = sessionStorage.getItem('email');
   apiURL: string = environment.backEnd;
+  httpOptions = {
+    headers: new HttpHeaders( {'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + sessionStorage.getItem('authToken')
+    })
+  };
 
-  constructor(private http: HttpClient, private authService: AuthenticateService) { }
+  constructor(private http: HttpClient) { }
 
   public getCurrentUser(): Observable<User> {
-    return this.http.get<User>(this.apiURL+`api/user?email=${this.userEmail}`, httpOptions);
+    return this.http.get<User>(this.apiURL+`api/user?email=${this.userEmail}`, this.httpOptions);
   }
 
   errorHandler(error: any) {

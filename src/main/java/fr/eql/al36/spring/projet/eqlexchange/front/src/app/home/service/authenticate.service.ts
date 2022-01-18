@@ -23,6 +23,7 @@ export class AuthenticateService {
     return this.http.post<LoginResponse>(this.authenticateURL,login, {headers: this._headers} )
       .pipe(
         tap((loginResponse)=>{
+          sessionStorage.clear();
           this.saveToken(loginResponse);
           this.isAuthenticated = true;
           this.router.navigate(['eqlexchange/dashboard']);
