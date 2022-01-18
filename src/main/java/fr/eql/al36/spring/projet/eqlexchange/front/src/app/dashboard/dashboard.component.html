@@ -9,8 +9,8 @@
   <div class="cards-container">
     <div class="col-sm-6 col-xl-3">
       <mat-card class="resume-card">
-        <mat-card-title>Name</mat-card-title>
-        <mat-card-subtitle>hah@hotmail.com</mat-card-subtitle>
+        <mat-card-title>{{user?.username }}</mat-card-title>
+        <mat-card-subtitle>{{user?.email}}</mat-card-subtitle>
         <div class="around-logo">
           <button mat-fab color="primary">
             <mat-icon>person</mat-icon>
@@ -18,7 +18,7 @@
         </div>
         <mat-divider></mat-divider>
         <div class="description">
-          <h2>registered since</h2>
+          <h2>{{user?.dateOfBirth}}</h2>
         </div>
       </mat-card>
     </div>
@@ -26,7 +26,10 @@
     <div class="col-sm-6 col-xl-3">
       <mat-card class="resume-card">
         <mat-card-title>Wallet</mat-card-title>
-        <mat-card-subtitle>fdskfjdsklmgdsjlfmezflksf</mat-card-subtitle>
+        <mat-card-subtitle>
+          {{user?.walletAddress!.substring(0,8) +'...'+user?.walletAddress!.substring(
+          user?.walletAddress!.length - 8, user?.walletAddress!.length - 1 )}}
+        </mat-card-subtitle>
         <div class="around-logo">
           <button mat-fab color="warn">
             <mat-icon>attach_money</mat-icon>
@@ -55,6 +58,7 @@
       </mat-card>
     </div>
   </div>
+
   <div class="chart-container">
     <app-chart [symbolPair]="'BNBUSDT'" [width]="1250" [height]="600"></app-chart>
   </div>

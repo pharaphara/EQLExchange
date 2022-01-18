@@ -6,5 +6,5 @@ export interface  User{
   username: string;
   dateOfBirth: string;
   email: string;
-  walletAdress: string;
+  walletAddress: string;
 }

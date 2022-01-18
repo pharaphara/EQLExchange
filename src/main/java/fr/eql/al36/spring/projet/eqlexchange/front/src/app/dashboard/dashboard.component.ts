@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {UserService} from "../service/user.service";
+import {User} from "../model/User";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-dashboard',
@@ -7,9 +10,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  user!: User;
+
+  constructor(private userService: UserService) {
+  }
 
   ngOnInit(): void {
+    this.getUser();
+
+  }
+
+  public getUser(): void {
+    this.userService.getCurrentUser().subscribe(
+      {
+        next: (response: User) => {
+          this.user = response;
+          console.log(this.user.walletAddress   + 'USERRR')
+        },
+        error: (error: HttpErrorResponse) => {
+          alert(error);
+        }
+      }
+    )
   }
 
 }
