@@ -28,6 +28,7 @@ import {TradeModule} from "./trade/trade.module";
 import { TransactionsComponent } from './transactions/transactions.component';
 import {MatSelectModule} from "@angular/material/select";
 import {RefillModule} from "./refill/refill.module";
+import {MatListModule} from "@angular/material/list";
 
 
 @NgModule({
@@ -63,7 +64,8 @@ import {RefillModule} from "./refill/refill.module";
     MatRadioModule,
     TradeModule,
     MatSelectModule,
-    RefillModule
+    RefillModule,
+    MatListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

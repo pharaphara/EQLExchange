@@ -1,6 +1,5 @@
 import {Component, Directive, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
-import {Asset} from "../wallet/state/asset";
 import {HttpErrorResponse} from "@angular/common/http";
 import {Currency} from "./state/currency";
 import {CurrencyService} from "./service/currency.service";
@@ -24,7 +23,8 @@ export class ExplorerComponent implements OnInit {
   displayedColumns: string[] = ['#', 'Crypto', 'Price', 'Supply', 'Actions'];
   currencies!: Currency[];
 
-  constructor(private router: Router, private currencyService: CurrencyService) { }
+  constructor(private router: Router, private currencyService: CurrencyService) {
+  }
 
   ngOnInit(): void {
     this.getAssets();
@@ -35,13 +35,14 @@ export class ExplorerComponent implements OnInit {
   }
 
   public getAssets(): void {
-    this.currencyService.getAllCurrencies().subscribe(
-      (response: Currency[]) => {
-        this.currencies = response || [];
-      },
-      (error: HttpErrorResponse) => {
-        alert(error.message);
-      },
+    this.currencyService.getAllCurrencies().subscribe({
+        next: (response: Currency[]) => {
+          this.currencies = response || [];
+        },
+        error: (error: HttpErrorResponse) => {
+          alert(error.message);
+        },
+      }
     );
   }
 

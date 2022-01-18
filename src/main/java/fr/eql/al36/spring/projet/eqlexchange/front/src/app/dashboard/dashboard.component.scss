@@ -49,6 +49,7 @@ mat-divider {
 
 .container-pair {
   display: flex;
+  margin-top: 20px;
 }
 
 .container-pair h2 {
@@ -60,4 +61,25 @@ mat-divider {
   padding-top: 10px;
   font-size: 30px;
   color: white;
+}
+
+.logo-img {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
+
+.container-list-chart {
+  display: flex;
+}
+ .list-item {
+  color: white;
+}
+
+mat-list {
+  margin-top: 60px;
+}
+
+mat-list-item:hover {
+  color: #78bcba;
 }
