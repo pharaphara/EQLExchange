@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {FormControl, FormGroup} from "@angular/forms";
 import {TradeOrder} from "./state/trade-order";
-import {TradeOrderService} from "./state/service/trade-order.service";
+import {TradeOrderService} from "./service/trade-order.service";
 import {HttpErrorResponse} from "@angular/common/http";
 
 const currency = {
