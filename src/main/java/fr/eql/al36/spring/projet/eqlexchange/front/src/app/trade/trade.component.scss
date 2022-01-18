@@ -44,6 +44,26 @@ mat-card {
   background-color: #17c671 !important;
 }
 
+.currency-logo {
+  width: 40px;
+  height: 40px;
+  margin-left: 5px;
+}
+
+.container-pair {
+  display: flex;
+}
+
+.container-pair h2 {
+  padding: 10px;
+  color: #818ea3;
+}
+
+.container-pair h1 {
+  padding-top: 10px;
+  font-size: 30px;
+}
+
 .btn-submit  button.mat-warn{
   width: 200px;
 }
