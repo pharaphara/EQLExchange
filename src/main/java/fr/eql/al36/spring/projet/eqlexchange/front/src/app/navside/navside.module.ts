@@ -16,6 +16,7 @@ import {ExplorerComponent} from "../explorer/explorer.component";
 import {ExplorerModule} from "../explorer/explorer.module";
 import {TradeComponent} from "../trade/trade.component";
 import {TransactionsComponent} from "../transactions/transactions.component";
+import {RefillComponent} from "../refill/refill.component";
 
 const routes: Routes = [
   { path: '', component: HomeComponent},
@@ -25,6 +26,7 @@ const routes: Routes = [
       { path: 'explorer/trade/:id', component: TradeComponent, canActivate: [AuthGuard] },
       { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
       { path: 'transactions', component: TransactionsComponent, canActivate: [AuthGuard] },
+      { path: 'refill', component: RefillComponent, canActivate: [AuthGuard] }
 ] }
 ];
 

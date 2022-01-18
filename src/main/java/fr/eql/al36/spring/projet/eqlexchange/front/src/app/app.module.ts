@@ -26,6 +26,8 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatRadioModule} from "@angular/material/radio";
 import {TradeModule} from "./trade/trade.module";
 import { TransactionsComponent } from './transactions/transactions.component';
+import {MatSelectModule} from "@angular/material/select";
+import {RefillModule} from "./refill/refill.module";
 
 
 @NgModule({
@@ -59,7 +61,9 @@ import { TransactionsComponent } from './transactions/transactions.component';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatRadioModule,
-    TradeModule
+    TradeModule,
+    MatSelectModule,
+    RefillModule
   ],
   providers: [],
   bootstrap: [AppComponent]
