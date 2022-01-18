@@ -25,8 +25,7 @@ export class DashboardComponent implements OnInit {
   }
 
   public getUser(): void {
-    this.userService.getCurrentUser().subscribe(
-      {
+    this.userService.getCurrentUser().subscribe({
         next: (response: User) => {
           this.user = response;
         },
@@ -45,7 +44,7 @@ export class DashboardComponent implements OnInit {
         error: (error: HttpErrorResponse) => {
           alert(error.message);
         },
-      complete: () => this.getAmountWallet()
+        complete: () => this.getAmountWallet()
       }
     );
   }

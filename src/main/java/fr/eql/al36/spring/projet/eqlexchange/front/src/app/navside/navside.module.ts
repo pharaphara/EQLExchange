@@ -15,6 +15,7 @@ import {DashboardComponent} from "../dashboard/dashboard.component";
 import {ExplorerComponent} from "../explorer/explorer.component";
 import {ExplorerModule} from "../explorer/explorer.module";
 import {TradeComponent} from "../trade/trade.component";
+import {TransactionsComponent} from "../transactions/transactions.component";
 
 const routes: Routes = [
   { path: '', component: HomeComponent},
@@ -22,7 +23,8 @@ const routes: Routes = [
       { path: 'wallet', component: WalletComponent, canActivate: [AuthGuard] },
       { path: 'explorer', component: ExplorerComponent, canActivate: [AuthGuard]},
       { path: 'explorer/trade/:id', component: TradeComponent, canActivate: [AuthGuard] },
-      { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] }
+      { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+      { path: 'transactions', component: TransactionsComponent, canActivate: [AuthGuard] },
 ] }
 ];
 

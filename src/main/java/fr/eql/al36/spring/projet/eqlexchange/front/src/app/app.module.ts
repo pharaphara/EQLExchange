@@ -7,7 +7,7 @@ import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import {HomeModule} from "./home/home.module";
-import {RouterModule, Routes} from "@angular/router";
+import {RouterModule} from "@angular/router";
 import {NavsideModule} from "./navside/navside.module";
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import {MatSliderModule} from "@angular/material/slider";
@@ -25,6 +25,7 @@ import { TradeComponent } from './trade/trade.component';
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatRadioModule} from "@angular/material/radio";
 import {TradeModule} from "./trade/trade.module";
+import { TransactionsComponent } from './transactions/transactions.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import {TradeModule} from "./trade/trade.module";
     DashboardComponent,
     ChartComponent,
     ExplorerComponent,
-    TradeComponent
+    TradeComponent,
+    TransactionsComponent
   ],
   imports: [
     BrowserModule,
