@@ -42,4 +42,22 @@
       background-color: white;
     }
   }
+
+  .done-logo {
+    color: #17c671;
+  }
+
+  .undone-logo {
+    color: orange;
+  }
+  
+  .success-container {
+    justify-content: center;
+    display: flex;
+    color: white;
+  }
+  
+  .success-container h3 {
+    margin-left: 10px;
+  }
   

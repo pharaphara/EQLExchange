@@ -20,6 +20,8 @@ export class TransferComponent implements OnInit {
   public form!: FormGroup;
   currencies!: Currency[];
   isSuccess: boolean = false;
+  isTransfertOk: boolean = false;
+  resultMessage!: String;
 
   ngOnInit(): void {
     this.getCurrencies();
@@ -32,24 +34,21 @@ export class TransferComponent implements OnInit {
   }
 
   doTransfer(){
-    console.log('*******************************************');
-    console.log(this.form.value.walletAddresse);
-    console.log(this.form.value.userEmail);
-    console.log(this.form.value.amount);
-    console.log(this.form.value.currencyTicker);
-    console.log('********************************************');
     this.paymentService.doTransfer(this.form.value).subscribe({
-      next:() => {
-        console.log(this.form.value);
-      },
       error: (error: HttpErrorResponse) => {
         alert(error)      
     },
-    complete: () => {
+    next: (resultTransferDto: ResultTransferDto) => {
       this.isSuccess = true;
+      if(resultTransferDto.transfertOk){
+        this.isTransfertOk = true;
+        this.resultMessage = 'Successfully !';
       setTimeout(()=>{
         this.router.navigate(['eqlexchange/wallet']);
       }, 1000);
+      }else{
+        this.resultMessage = resultTransferDto.message;
+      }
     }
   }
   );

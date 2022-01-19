@@ -33,8 +33,9 @@
               <button type="submit" mat-raised-button color="primary">Send</button>
 
               <div *ngIf="isSuccess" class="success-container">
-                <mat-icon class="done-logo">check_circle_outline</mat-icon>
-                <h3>Successfully ! </h3>
+                <mat-icon *ngIf="isTransfertOk" class="done-logo">check_circle_outline</mat-icon>
+                <mat-icon *ngIf="isTransfertOk == false" class="undone-logo">error</mat-icon>
+                <h3>{{resultMessage}}  </h3>
               </div>
         </form>
     </div>
