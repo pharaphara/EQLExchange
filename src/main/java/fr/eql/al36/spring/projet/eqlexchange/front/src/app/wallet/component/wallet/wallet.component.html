@@ -29,6 +29,7 @@
       <h1>{{asset.currencyTicker}}</h1>
       <div class="amount">
         <h1>{{asset.amount.toFixed(3)}}</h1>
+        <h2>≈ {{getAssetAmount(asset.currencyTicker).toFixed(3)}} €</h2>
       </div>
     </mat-list-item>
   </mat-list>
