@@ -29,6 +29,8 @@ import { TransactionsComponent } from './transactions/transactions.component';
 import {MatSelectModule} from "@angular/material/select";
 import {RefillModule} from "./refill/refill.module";
 import {MatListModule} from "@angular/material/list";
+import { TransferComponent } from './transfer/transfer.component';
+import {TransferModule} from "./transfer/transfer.module";
 
 
 @NgModule({
@@ -65,7 +67,8 @@ import {MatListModule} from "@angular/material/list";
     TradeModule,
     MatSelectModule,
     RefillModule,
-    MatListModule
+    MatListModule,
+    TransferModule
   ],
   providers: [],
   bootstrap: [AppComponent]
