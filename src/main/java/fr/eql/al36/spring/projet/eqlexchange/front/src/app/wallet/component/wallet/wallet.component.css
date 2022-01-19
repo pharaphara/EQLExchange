@@ -4,23 +4,72 @@ table {
     color: white;
     margin: 0 auto;
   }
-  
+
   th {
     color: white;
     font-size: 22px;
   }
-  
+
   td {
     color: white;
     font-size: 18px;
   }
-  
+
   .btn-trade {
     padding: 0 10px;
   }
-  
+
   .image{
       width: 40px;
       height: 40px;
       margin-left: 5px;
   }
+
+mat-card {
+  width: 35%;
+  border-radius: 10px;
+  padding: 40px 30px 20px 40px;
+  margin: 0 auto;
+  background-color: #142028;
+  color: #818ea3;
+}
+
+.second-card {
+  background-color: #0b1217;
+  padding: 20px;
+}
+
+h1 {
+  color: white;
+}
+
+mat-list-item h1 {
+  padding: 20px;
+  margin-top: 18px;
+}
+
+.amount {
+  float: right;
+  position: absolute;
+  left: 318px;
+}
+
+
+mat-list-item {
+  margin-top: 20px;
+}
+
+.btn-container button {
+  margin: 0 10px;
+  width: 25%;
+  background-color: #0b1217;
+}
+
+.container-img {
+  padding: 10px;
+}
+
+.logo-img {
+  height: 50px;
+  width: 50px;
+}
