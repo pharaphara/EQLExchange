@@ -7,7 +7,6 @@
   width: 50%;
   margin: 0 auto;
   background-color: #142028;
-  border-radius: 20px;
 }
 
 
@@ -15,7 +14,7 @@
 mat-card-title {
   text-align: center;
   padding: 10px;
-  color: #aaebf1;
+  color: white;
 }
 
 mat-card-subtitle {
@@ -46,6 +45,9 @@ mat-card-subtitle {
 button {
   width: 50%;
   margin: 10px auto;
+  background-color: #fcd535 !important;
+  color: black !important;
+
 }
 
 ::ng-deep {

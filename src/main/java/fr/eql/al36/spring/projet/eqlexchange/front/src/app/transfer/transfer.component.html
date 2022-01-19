@@ -6,7 +6,7 @@
 </div>
 
 <mat-card class="card">
-    <mat-card-title>TRANSFER</mat-card-title>
+    <mat-card-title>Transfer your Crypto</mat-card-title>
     <div class="formulaire">
         <form [formGroup]="form" class="normal-form" (ngSubmit)="doTransfer()">
 
@@ -29,8 +29,8 @@
                 <mat-label>Wallet address</mat-label>
                 <input matInput formControlName="walletAdresse" matInput>
               </mat-form-field>
-              
-              <button type="submit" mat-raised-button color="primary">Send</button>
+
+              <button type="submit" mat-raised-button color="primary">Transfer</button>
 
               <div *ngIf="isSuccess" class="success-container">
                 <mat-icon *ngIf="isTransfertOk" class="done-logo">check_circle_outline</mat-icon>
