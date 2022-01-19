@@ -1,5 +1,5 @@
 import {HttpErrorResponse} from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AssetService} from '../../service/asset.service';
 import {Asset} from '../../state/asset';
 import {UserService} from "../../../service/user.service";
@@ -15,35 +15,50 @@ export class WalletComponent implements OnInit {
 
   public assets!: Asset[];
   public user!: User;
+  amount!: number;
   displayedColumns: string[] = ['Logo', 'Currency', 'Units'];
 
-  constructor(private assetService: AssetService, private userService: UserService) { }
+  constructor(private assetService: AssetService, private userService: UserService) {
+  }
 
   public ngOnInit(): void {
     this.getUser();
     this.getAssets();
   }
 
-  public getUser():void {
+  public getUser(): void {
     this.userService.getCurrentUser().subscribe(
-      (response: User) => {
-        this.user = response;
-      },
-      (error: HttpErrorResponse) => {
-        alert(error);
+      {
+        next: (response: User) => {
+          this.user = response;
+        },
+        error: (error: HttpErrorResponse) => {
+          alert(error);
+        }
       }
     )
   }
 
   public getAssets(): void {
     this.assetService.getAssets().subscribe(
-      (response: Asset[]) => {
-        this.assets = response || [];
-      },
-      (error: HttpErrorResponse) => {
-        alert(error.message);
-      },
+      {
+        next: (response: Asset[]) => {
+          this.assets = response || [];
+        },
+        error: (error: HttpErrorResponse) => {
+          alert(error.message);
+        },
+        complete: () => this.getAmount()
+      }
     );
+  }
+
+  public getAmount(): void {
+    this.assetService.getWalletAmount(this.assets).subscribe( {
+     next: (response:number) => {
+       this.amount = response;
+     }
+    });
   }
 
 }
