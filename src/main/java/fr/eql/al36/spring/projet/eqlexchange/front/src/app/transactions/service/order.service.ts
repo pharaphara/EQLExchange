@@ -23,4 +23,9 @@ export class OrderService {
     return this.http.get<Order[]>(`${this.apiUrl}/bookOrder/Orders?pair=${pair}`);
   }
 
+  public getLastUserOrder(): Observable<Order> {
+    return this.http.get<Order>(
+      `${this.apiUrl}/bookOrder/lastOrder?user=${sessionStorage.getItem('email')}`);
+  }
+
 }

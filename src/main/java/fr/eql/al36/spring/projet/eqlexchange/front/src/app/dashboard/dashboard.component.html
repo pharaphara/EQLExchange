@@ -45,7 +45,7 @@
     <div class="col-sm-6 col-xl-3">
       <mat-card class="resume-card">
         <mat-card-title>Last exchange</mat-card-title>
-        <mat-card-subtitle>Bitcoin</mat-card-subtitle>
+        <mat-card-subtitle>{{lastOrder?.currencyPair?.replace('_', '/')}}</mat-card-subtitle>
         <div class="around-logo">
           <button mat-fab color="accent">
             <mat-icon>history icon</mat-icon>
@@ -53,7 +53,10 @@
         </div>
         <mat-divider></mat-divider>
         <div class="description">
-          <h2>16 BNB</h2>
+          <h2>{{lastOrder?.amount}} |
+          <span *ngIf="lastOrder?.orderType == 'BID' " id="bid">BUY</span>
+            <span *ngIf="lastOrder?.orderType == 'ASK' " id="sell">SELL</span>
+          </h2>
         </div>
       </mat-card>
     </div>

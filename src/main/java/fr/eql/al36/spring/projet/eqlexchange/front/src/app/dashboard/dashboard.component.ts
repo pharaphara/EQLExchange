@@ -6,6 +6,8 @@ import {Asset} from "../wallet/state/asset";
 import {AssetService} from "../wallet/service/asset.service";
 import {Currency} from "../explorer/state/currency";
 import {CurrencyService} from "../explorer/service/currency.service";
+import {Order} from "../transactions/state/order";
+import {OrderService} from "../transactions/service/order.service";
 
 @Component({
   selector: 'app-dashboard',
@@ -16,16 +18,18 @@ export class DashboardComponent implements OnInit {
 
   currencies!: Currency[];
   user!: User;
+  lastOrder!: Order;
   assets!: Asset[];
   walletAmount: number = 0;
 
   constructor(private userService: UserService, private assetService: AssetService,
-              private currencyService: CurrencyService) { }
+              private currencyService: CurrencyService, private orderService: OrderService) { }
 
   ngOnInit(): void {
     this.getUser();
     this.getAssets();
     this.getAllCurrency();
+    this.getLastOrder();
   }
 
   public getUser(): void {
@@ -38,6 +42,17 @@ export class DashboardComponent implements OnInit {
         }
       }
     )
+  }
+
+  public getLastOrder():void {
+    this.orderService.getLastUserOrder().subscribe( {
+        next: (response: Order) => {
+        this.lastOrder = response;
+      },
+        error: (error: HttpErrorResponse) => {
+          alert(error);
+        }
+    });
   }
 
   public getAssets(): void {
