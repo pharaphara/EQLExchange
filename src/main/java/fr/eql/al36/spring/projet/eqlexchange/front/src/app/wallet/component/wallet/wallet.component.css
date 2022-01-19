@@ -27,7 +27,6 @@ table {
 
 mat-card {
   width: 35%;
-  border-radius: 10px;
   padding: 40px 30px 20px 40px;
   margin: 0 auto;
   background-color: #142028;
@@ -35,7 +34,8 @@ mat-card {
 }
 
 .second-card {
-  background-color: #0b1217;
+  margin-top: 10px;
+  background-color: #142028;
   padding: 20px;
 }
 
