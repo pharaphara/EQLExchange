@@ -14,9 +14,9 @@
   <h1 id="amount">{{amount?.toFixed(3)}} €</h1>
 
   <div class="btn-container">
-    <button mat-raised-button color="accent">Trade</button>
-    <button mat-raised-button color="accent">Refill</button>
-    <button mat-raised-button color="accent">Transfer</button>
+    <button mat-raised-button color="accent" [routerLink]="['/eqlexchange/explorer']">Trade</button>
+    <button mat-raised-button color="accent" [routerLink]="['/eqlexchange/refill']">Refill</button>
+    <button mat-raised-button color="accent" [routerLink]="['/eqlexchange/transfer']">Transfer</button>
   </div>
 </mat-card>
 

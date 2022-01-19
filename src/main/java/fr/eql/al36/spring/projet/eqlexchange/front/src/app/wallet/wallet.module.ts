@@ -6,6 +6,7 @@ import { MatTableModule } from '@angular/material/table';
 import {MatCardModule} from "@angular/material/card";
 import {MatButtonModule} from "@angular/material/button";
 import {MatListModule} from "@angular/material/list";
+import {RouterModule} from "@angular/router";
 
 
 
@@ -13,13 +14,14 @@ import {MatListModule} from "@angular/material/list";
   declarations: [
     WalletComponent
   ],
-  imports: [
-    CommonModule,
-    BrowserModule,
-    MatTableModule,
-    MatCardModule,
-    MatButtonModule,
-    MatListModule
-  ]
+    imports: [
+        CommonModule,
+        BrowserModule,
+        MatTableModule,
+        MatCardModule,
+        MatButtonModule,
+        MatListModule,
+        RouterModule
+    ]
 })
 export class WalletModule { }
