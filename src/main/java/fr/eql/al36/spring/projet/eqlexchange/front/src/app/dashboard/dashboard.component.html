@@ -5,6 +5,7 @@
 <div class="title-container">
   <h1 class="title-page">DASHBOARD</h1>
 </div>
+
 <div class="page">
   <div class="cards-container">
     <div class="col-sm-6 col-xl-3">
@@ -62,16 +63,18 @@
     </div>
   </div>
 
+  <marquee behavio="scroll" direction="left">
+    <mat-list class="list-horizontal">
+      <mat-list-item *ngFor="let currency of currencies" class="list-item">
+        <img src="assets/logo/{{currency.ticker.toLocaleLowerCase()}}.png" class="logo-img">
+        {{currency.name}}
+      </mat-list-item>
+    </mat-list>
+  </marquee>
+
   <div class="chart-container">
 
     <div class="container-list-chart">
-
-        <mat-list>
-          <mat-list-item *ngFor="let currency of currencies" class="list-item">
-            <img src="assets/logo/{{currency.ticker.toLocaleLowerCase()}}.png" class="logo-img">
-            {{currency.name}}
-          </mat-list-item>
-        </mat-list>
 
     <div class="chart-pair">
       <div class="container-pair">
@@ -80,7 +83,7 @@
         <h2>EUR /</h2>
         <h1>BTC</h1>
       </div>
-      <app-chart [symbolPair]="'BTCUSDT'" [width]="1000" [height]="400"></app-chart>
+      <app-chart [symbolPair]="'BTCUSDT'" [width]="1250" [height]="400"></app-chart>
     </div>
     </div>
   </div>
