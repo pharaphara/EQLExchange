@@ -1,8 +1,22 @@
 .cards-container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  width: 30%;
+}
+
+.title-container {
+  padding: 50px 0 0px 50px !important;
+}
+
+.one-card {
+  margin-top: 10px;
+  width: 80%;
+}
+
+.page {
+  display: flex;
 }
 
 .resume-card {
@@ -10,7 +24,8 @@
 }
 
 mat-card {
-  background-color: #142028;
+  margin-top: 10px;
+  background-color: #0b1217;
   color: lightgrey;
   max-height: 150px;
 }
@@ -40,7 +55,7 @@ mat-divider {
   margin-top: 20px;
   display: flex;
   flex-direction: column;
-  margin-left: 10%;
+  margin-left: 2%;
 }
 
 .currency-logo {
@@ -85,12 +100,20 @@ mat-list-item:hover {
   color: #78bcba;
 }
 
-#sell {
-  color: #9e2d36;
+.sell {
+  color: #bf858b;
 }
 
-#bid {
-  color: #17c671;
+.sell span {
+  color: #b6313b ;
+}
+
+.bid {
+  color: #a3ccbb;
+}
+
+.bid span {
+  color: #14aa63;
 }
 
 mat-list.list-horizontal {

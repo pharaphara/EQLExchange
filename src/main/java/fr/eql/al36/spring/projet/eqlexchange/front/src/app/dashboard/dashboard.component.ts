@@ -63,6 +63,7 @@ export class DashboardComponent implements OnInit {
         error: (error: HttpErrorResponse) => {
           alert(error.message);
         },
+      complete: () => this.getWalletAmount()
       }
     );
   }
@@ -75,30 +76,16 @@ export class DashboardComponent implements OnInit {
         error: (error: HttpErrorResponse) => {
           alert(error.message);
         },
-      complete: () => this.getAmountWallet()
       }
     );
   }
 
-  getCurrencyPrice(ticker: string): number {
-    for(let currency of this.currencies) {
-      if (currency.ticker == ticker) {
-        console.log(currency.name)
-        return currency.price;
+  public getWalletAmount(): void {
+    this.assetService.getWalletAmount(this.assets).subscribe( {
+      next: (response:number) => {
+        this.walletAmount = response;
       }
-    }
-    return 0;
-  }
-
-  public getAmountWallet(){
-
-    for (let asset of this.assets) {
-      if (asset.currencyTicker == 'EUR'){
-        this.walletAmount += asset.amount;
-      }
-      this.walletAmount += this.getCurrencyPrice(asset.currencyTicker) * asset.amount;
-    }
-    return this.walletAmount;
+    });
   }
 
 }
