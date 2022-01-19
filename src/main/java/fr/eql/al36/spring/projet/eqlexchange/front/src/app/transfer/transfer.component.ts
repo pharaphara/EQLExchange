@@ -1,9 +1,10 @@
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { CurrencyService } from '../explorer/service/currency.service';
 import { Currency } from '../explorer/state/currency';
 import { PaymentService } from '../refill/service/payment.service';
+import { ResultTransferDto } from 'src/app/transfer/state/resultTransferDto';
 
 @Component({
   selector: 'app-transfer',
@@ -36,7 +37,7 @@ export class TransferComponent implements OnInit {
       console.log('ok');
     }
   }
-  )
+  );
   }
 
   public getCurrencies(): void {
