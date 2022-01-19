@@ -1,1 +1,37 @@
-<p>transfer works!</p>
+<div class="popup-container">
+  <img alt="popup" class="popup-img" src="/assets/img/popup/popup5.png">
+</div>
+<div class="title-container">
+  <h1 class="title-page">TRANSFER CRYPTO TO A WALLET</h1>
+</div>
+
+<mat-card class="card">
+    <mat-card-title>TRANSFER</mat-card-title>
+    <div class="formulaire">
+        <form [formGroup]="form" class="normal-form" (ngSubmit)="doTransfer()">
+
+            <mat-form-field appearance="fill">
+                <mat-label>Select crypto</mat-label>
+                <mat-select formControlName="currencyTicker">
+                  <mat-option *ngFor="let currency of currencies" value="{{currency.ticker}}">
+                    {{currency.name}}
+                    <img alt="logo" src="assets/logo/{{currency.ticker.toLocaleLowerCase()}}.png" class="currency-logo">
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <mat-form-field appearance="fill">
+                <mat-label>Amount</mat-label>
+                <input matInput formControlName="montant" matInput>
+              </mat-form-field>
+
+              <mat-form-field appearance="fill">
+                <mat-label>Wallet address</mat-label>
+                <input matInput formControlName="montant" matInput>
+              </mat-form-field>
+              
+              <button type="submit" mat-raised-button color="primary">Send</button>
+
+        </form>
+    </div>
+</mat-card>
