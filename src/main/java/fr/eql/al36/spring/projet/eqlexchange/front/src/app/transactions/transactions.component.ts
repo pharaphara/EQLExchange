@@ -10,7 +10,7 @@ import {Order} from "./state/order";
 })
 export class TransactionsComponent implements OnInit {
 
-  displayedColumns: string[] = ['Date', 'Type', 'Pair', 'Amount', 'Status'];
+  displayedColumns: string[] = ['Date', 'Type', 'Pair', 'Amount', 'Limit', 'Status'];
   orders!: Order[];
 
   constructor(private orderService: OrderService) { }

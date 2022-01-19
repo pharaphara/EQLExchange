@@ -13,7 +13,7 @@ import {Order} from "../transactions/state/order";
 })
 export class TradeComponent implements OnInit {
 
-  displayedColumns: string[] = ['Date', 'Type', 'Pair', 'Amount', 'Status'];
+  displayedColumns: string[] = ['Date', 'Type', 'Pair', 'Amount', 'Limit', 'Status'];
   public isTransfer: boolean = false;
   public form!: FormGroup;
   public currencyId!: string;
