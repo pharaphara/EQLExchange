@@ -62,7 +62,8 @@ mat-list-item {
 .btn-container button {
   margin: 0 10px;
   width: 25%;
-  background-color: #0b1217;
+  background-color: #fcd535;
+  color: black;
 }
 
 .container-img {
