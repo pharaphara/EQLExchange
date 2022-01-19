@@ -1,5 +1,5 @@
 <div class="popup-container">
-  <img alt="popup" class="popup-img" src="/assets/img/popup/popup5.png">
+  <img alt="popup" class="popup-img" src="/assets/img/popup/popup6.png">
 </div>
 <div class="title-container">
   <h1 class="title-page">TRANSFER CRYPTO TO A WALLET</h1>
@@ -22,16 +22,20 @@
 
               <mat-form-field appearance="fill">
                 <mat-label>Amount</mat-label>
-                <input matInput formControlName="montant" matInput>
+                <input matInput formControlName="amount" matInput>
               </mat-form-field>
 
               <mat-form-field appearance="fill">
                 <mat-label>Wallet address</mat-label>
-                <input matInput formControlName="walletAddress" matInput>
+                <input matInput formControlName="walletAdresse" matInput>
               </mat-form-field>
               
               <button type="submit" mat-raised-button color="primary">Send</button>
 
+              <div *ngIf="isSuccess" class="success-container">
+                <mat-icon class="done-logo">check_circle_outline</mat-icon>
+                <h3>Successfully ! </h3>
+              </div>
         </form>
     </div>
 </mat-card>

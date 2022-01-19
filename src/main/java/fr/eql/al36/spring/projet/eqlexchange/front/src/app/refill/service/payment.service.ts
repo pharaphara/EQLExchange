@@ -18,7 +18,7 @@ export class PaymentService {
   public sendPayment(payment: Payment): Observable<Payment> {
     return this.http.post<Payment>(`${this.apiUrl}/sendPayment`, payment);
   }
-  public doTransfer(transferDto: TransferDto): Observable<ResultTransferDto> {
-    return this.http.post<ResultTransferDto>(`${this.apiUrl}/transfertCurrency`, transferDto);
+  public doTransfer(transferDto: TransferDto): Observable<TransferDto> {
+    return this.http.post<TransferDto>(`${this.apiUrl}/transfertCurrency`, transferDto);
   }
 }

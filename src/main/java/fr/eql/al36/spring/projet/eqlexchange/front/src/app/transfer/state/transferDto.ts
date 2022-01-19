@@ -1,6 +1,6 @@
 export interface TransferDto {
     userEmail: string,
     currencyTicker: string,
-    walletAddress: String,
-    montant: string
+    walletAdresse: String,
+    amount: string
   }
