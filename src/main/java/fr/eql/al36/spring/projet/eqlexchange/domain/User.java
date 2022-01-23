@@ -5,7 +5,6 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -42,15 +41,6 @@ public class User {
 
     @Column(unique = true, nullable = false)
     private String walletAddress;
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "user")
-    Set<Asset> assets;
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "user")
-    List<TradeOrder> tradeOrders;
-
     @JsonIgnore
     @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(name = "user_authority", joinColumns = {
@@ -71,20 +61,11 @@ public class User {
                 walletAddress, user.walletAddress);
     }
 
-
     @Override
     public int hashCode() {
         return Objects.hash(id, firstName, lastName, username, dateOfBirth, email, password, walletAddress);
     }
 
 
-    public double totalAssetsValue(List<Asset> assets) {
-        double totalValue = 0;
-        for(Asset asset : assets) {
-            List<CurrencyPrice> currencyPrices = asset.getCurrency().getCurrencyPrices();
-            totalValue += (currencyPrices.get(currencyPrices.size() - 1).getPrice()) * asset.getBalance();
-        }
-        return totalValue;
-    }
 
 }

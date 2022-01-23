@@ -1,7 +1,5 @@
 package fr.eql.al36.spring.projet.eqlexchange.security;
 
-import java.io.IOException;
-
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
@@ -19,19 +17,18 @@ import org.springframework.web.filter.GenericFilterBean;
 @Component
 public class AuthTokenFilter extends GenericFilterBean {
 
-    private UserDetailsService customUserDetailsService;
-    private String authTokenHeaderName = "Authorization";
+    private final UserDetailsService customUserDetailsService;
+    private static final String AUTH_TOKEN_HEADER_NAME = "Authorization";
 
     public AuthTokenFilter(UserDetailsService userDetailsService) {
         this.customUserDetailsService = userDetailsService;
     }
 
     @Override
-    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
-            throws IOException, ServletException {
+    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws ServletException {
         try {
             HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
-            String authToken = httpServletRequest.getHeader(authTokenHeaderName);
+            String authToken = httpServletRequest.getHeader(AUTH_TOKEN_HEADER_NAME);
 
             if (StringUtils.hasText(authToken)) {
                 String username = JwtUtil.getUserNameFromToken(authToken);
@@ -41,15 +38,13 @@ public class AuthTokenFilter extends GenericFilterBean {
 
                     UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(userDetails,
                             userDetails.getPassword(), userDetails.getAuthorities());
-                    System.out.println("Je suis passssssséééééééééééééééééééééé");
                     SecurityContextHolder.getContext().setAuthentication(token);
                 }
             }
 
             filterChain.doFilter(servletRequest, servletResponse);
         } catch (Exception ex) {
-            System.out.println("Je me suis fait attrapéééééééééééééééééééééééééééééééééé");
-            throw new RuntimeException(ex);
+            throw new ServletException(ex);
         }
     }
 }
