@@ -27,6 +27,12 @@ public class UserController {
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
+    @PostMapping("/newUser")
+    public ResponseEntity<User> createUser(@RequestBody User user) {
+        User newUser = userService.addNewUser(user);
+        return  new ResponseEntity<>(newUser, HttpStatus.OK);
+    }
+
 
     @GetMapping("access-denied")
     public String accessDenied(@AuthenticationPrincipal UserDetails userDetails, Model model) {

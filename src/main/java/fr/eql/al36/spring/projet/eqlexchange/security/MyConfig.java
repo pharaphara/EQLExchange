@@ -32,6 +32,7 @@ public class MyConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/authenticate").permitAll()
                 .antMatchers("/").permitAll()
+                .antMatchers("/api/newUser").permitAll()
                 .antMatchers("/css/**").permitAll()
                 .antMatchers("/img/**").permitAll()
                 .antMatchers("/js/**").permitAll()
