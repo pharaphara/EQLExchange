@@ -33,6 +33,14 @@ public class UserController {
         return  new ResponseEntity<>(newUser, HttpStatus.OK);
     }
 
+    @GetMapping("/exist")
+    public Boolean checkExistEmail(@RequestParam(value = "email") String email) {
+        User user = userService.findUserByEmail(email);
+        if(user != null) {
+            return true;
+        }
+        return false;
+    }
 
     @GetMapping("access-denied")
     public String accessDenied(@AuthenticationPrincipal UserDetails userDetails, Model model) {
